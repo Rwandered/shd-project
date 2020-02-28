@@ -97,7 +97,7 @@ export default class Settings {
 
 
     async updateTheme(data) {
-        console.log(data)
+        // console.log(data)
         try {
             const dataThemes = await fetch(
                 `${ADDRESS}${PORT}/opt/theme/update`, {

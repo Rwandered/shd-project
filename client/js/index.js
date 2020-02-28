@@ -58,7 +58,7 @@ regBtn.addEventListener('click', async event => {
                 body: JSON.stringify(obj)
             });
         const result = await data.json();
-        console.log(result);
+        // console.log(result);
         toast.createToastContainer(result.message);
     } catch (e) {}
 

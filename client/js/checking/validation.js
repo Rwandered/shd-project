@@ -37,6 +37,6 @@ export const startValidation = targetElement => {
         }
     });
 
-    console.log(validStatus)
+    // console.log(validStatus)
     return validStatus;
 };

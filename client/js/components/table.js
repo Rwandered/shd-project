@@ -12,7 +12,7 @@ export default class Table {
 
     async renderTable(tasks) {
         //tasks - массив задач
-        console.log(tasks)
+        // console.log(tasks)
         try {
             //1) создаем таблицу
             const table = createTable();
@@ -70,8 +70,8 @@ export default class Table {
         const taskData = {
             id: task._id,
             theme: themeName.theme,
-            to: userTo.email,
-            from: userFrom.email,
+            to: userTo.name,
+            from: userFrom.name,
             creationDate: customDate,
             status: task.status,
             description: task.description,

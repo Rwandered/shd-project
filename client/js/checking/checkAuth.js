@@ -13,7 +13,7 @@ export default class LocalAuth {
     checkAuth(location) {
         const userData = localStorage.getItem(this.storagename)
         if (userData) {
-            console.log(1234)
+            // console.log(1234)
             const userAuthData = JSON.parse(userData);
             const userToken = userAuthData.token
             if (userToken) {
@@ -26,7 +26,7 @@ export default class LocalAuth {
             }
         } else {
             if (window.location.pathname !== '/') {
-                console.log(2222)
+                // console.log(2222)
                 window.location = window.location.origin;
             }
         }

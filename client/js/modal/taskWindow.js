@@ -207,14 +207,13 @@ const addEventToSelectTheme = (listElement, selectElement, selectWrapper, item) 
             if (to.classList.contains('valid-item')) {
 
             } else {
-                console.log(111)
                 to.classList.add('valid-item')
             }
             //5.1.2) получаем данные для id пользователя для заполнения ячейки to
             try {
                 const user = await setting.getUserById(item.executor);
 
-                to.value = user.email;
+                to.value = user.name;
                 if (to.classList.contains('toggleToHide')) {
                     to.classList.toggle('toggleToHide');
                     selectUsers.classList.toggle('toggleToHide');
@@ -227,7 +226,6 @@ const addEventToSelectTheme = (listElement, selectElement, selectWrapper, item) 
         //5.2) сюда придет если больше 1 исполнителя
         if (selectUsers.classList.contains('toggleToHide')) {
             if (to.classList.contains('valid-item')) {
-                console.log(111)
                 to.classList.remove('valid-item')
             }
             //5.2.1) спрятать ячейку to
@@ -289,7 +287,7 @@ const addListContentForExecutors = async listWrapper => {
             //тут мы добавили элементы выпадающего списка
             const listElement = document.createElement('li');
             listElement.classList.add('lContent');
-            const listContent = `<span>${user.email}</span>`;
+            const listContent = `<span>${user.name}</span>`;
             listElement.insertAdjacentHTML('beforeend', listContent);
 
             listWrapper.insertAdjacentElement('beforeend', listElement);
@@ -320,7 +318,7 @@ const defaultFill = async(id, container) => {
     const defaultFields = container.querySelectorAll('.fill-default');
     //2) делаем запрос к базе для получения данных о пользователе
     const user = await setting.getUserById(id);
-    [...defaultFields][0].value = user.email;
+    [...defaultFields][0].value = user.name;
     [...defaultFields][1].value = user._id;
     [...defaultFields][2].value = new Date().toLocaleDateString();
 }

@@ -154,9 +154,12 @@ const addEventToSelectComplects = (listWrapper, target, parentElement) => {
         elementDisappearing(selectWrapper, 2 / 100)
     }
     if (target.closest('.lFooter')) { //заголовок списка
+        console.log(111111);
         [...parentElement.children][0].textContent = target.textContent;
         themeId.value = '';
-        themeField.classList.toggle('toggleToHide');
+        if (themeField.classList.contains('toggleToHide')) {
+            themeField.classList.toggle('toggleToHide');
+        }
         elementDisappearing(selectWrapper, 2 / 100)
     }
 }

@@ -34,7 +34,7 @@ export const createRoleModalWindow = modalContent => {
     //10) вешаем кастомные события
     setRoleModalEvents(modalContainer)
 
-    console.log(modalContainer)
+    // console.log(modalContainer)
 }
 
 
@@ -62,7 +62,7 @@ const createRoleModal = modalContent => {
 const setRoleModalEvents = element => {
     element.addEventListener('click', () => {
         if (event.target.tagName == 'BUTTON') {
-            console.log(event.target)
+            // console.log(event.target)
             createNewRole(element);
         } else if (event.target.closest('.select-item')) {
             //тут навешивается событие по созданию выпадающего меню
@@ -103,7 +103,7 @@ const createSelectUserField = parentElement => {
 const addListContentForRoles = (listWrapper, targetItem) => {
     // listWrapper - элементы выпадающего меню
     // targetItem - элемент по которому кликнули
-    console.log(listWrapper);
+    // console.log(listWrapper);
     const roleContent = `
         <li class="lContent"><span>Admin</span></li>
         <li class="lContent"><span>Root</span></li>
@@ -144,7 +144,7 @@ const addListContentForUsers = async listWrapper => {
 
 const addEventToSelectUsers = (target, item) => {
     const userIdField = document.getElementById('userId');
-    console.log(item, userIdField)
+    // console.log(item, userIdField)
     const toBtn = document.querySelector('.select-users');
     const selectUserWrapper = target.closest('.select-wrapper');
     [...toBtn.children][0].textContent = target.textContent;
@@ -156,7 +156,7 @@ const addEventToSelectUsers = (target, item) => {
 const createNewRole = async element => {
     const formSend = element.querySelector('.methods');
     const role = element.querySelector('.select-role p').textContent.toLowerCase();
-    console.log(element)
+    // console.log(element)
     try {
         const result = await settings.setRole({
             userId: formSend.elements.userId.value,

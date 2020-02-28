@@ -32,7 +32,7 @@ export const createUserModalWindow = modalContent => {
     //10) вешаем кастомные события
     setUserModalEvents(modalContainer)
 
-    console.log(modalContainer)
+    // console.log(modalContainer)
 }
 
 const createUserModal = modalContent => {
@@ -52,7 +52,7 @@ const createUserModal = modalContent => {
 const setUserModalEvents = element => {
     element.addEventListener('click', () => {
         if (event.target.tagName == 'BUTTON') {
-            console.log(event.target)
+            // console.log(event.target)
             createNewUser(element);
         }
     });
@@ -60,9 +60,10 @@ const setUserModalEvents = element => {
 
 const createNewUser = async element => {
     const formSend = element.querySelector('.methods');
-    console.log(formSend)
+    // console.log(formSend)
     try {
         const result = await settings.setUser({
+            name: formSend.elements.user.value,
             email: formSend.elements.email.value,
             password: formSend.elements.password.value,
         });

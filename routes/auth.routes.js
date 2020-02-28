@@ -22,7 +22,7 @@ router.post(
                     message: 'Ошибка соединения - Указаны некорректные данные'
                 });
             }
-            const { email, password } = req.body;
+            const { name, email, password } = req.body;
             // тут надо проверить есть ли уже такой пользоватлеь в бд
             const usrCondidate = await User.findOne({ email });
             if (usrCondidate) {
@@ -32,7 +32,7 @@ router.post(
             const pwdHash = await bcrypt.hash(password, 12);
             // console.log(pwdHash);
             //create User
-            const user = new User({ email, password: pwdHash, role: 'user' });
+            const user = new User({ name, email, password: pwdHash, role: 'user' });
             //добавляем пользователя в базу
             user.save();
             res.status(201).json({ message: 'User has been created...' });

@@ -1,0 +1,336 @@
+/*
+  ========================================
+  Clearfix
+  ========================================
+*/
+
+.group:before,
+.group:after {
+    content: "";
+    display: table;
+}
+
+.group:after {
+    clear: both;
+}
+
+.group {
+    clear: both;
+    *zoom: 1;
+}
+
+
+/* 
+=================================
+Header
+=================================
+*/
+
+header {
+    padding: 10px;
+    border: 3px solid #fff;
+    margin: 0 auto;
+    width: 100%;
+}
+
+
+/*
+=================================
+Навигация
+================================= 
+ */
+
+.nav {
+    padding-top: 5px;
+    width: 100%;
+    margin: 0;
+}
+
+.block-btn,
+.nav p {
+    display: inline-block;
+}
+
+.logo {
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.nav li {
+    float: right;
+    padding-bottom: 5px;
+    letter-spacing: .5px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.nav li:hover {
+    color: #a9b2b9;
+}
+
+
+/* 
+===============================
+Modal window
+*/
+
+.modalWindow-wrapper {
+    width: 300px;
+    height: 280px;
+    background-color: #78909c;
+    position: absolute;
+    box-sizing: border-box;
+    border: 2px solid rgb(0, 0, 0);
+    padding: 6px;
+    border-radius: 5px;
+    z-index: 20;
+}
+
+.bg-layer {
+    position: fixed!important;
+    z-index: 15!important;
+    min-width: 100%!important;
+    height: 100%!important;
+    background: #000!important;
+    opacity: 0.5!important;
+    display: block!important;
+}
+
+.bg-layer-true {
+    display: none;
+}
+
+#headerModal img {
+    float: right;
+    cursor: pointer;
+}
+
+#headerModal img:hover {
+    background-color: darkgray;
+}
+
+#headerModal p {
+    float: left;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#headerModal {
+    padding: 5px;
+}
+
+.modalWindow-wrapper form {
+    clear: both;
+    padding: 5px 5px 5px 5px;
+    border-top: 2px solid #ccc;
+    margin-top: 5px;
+}
+
+.modalWindow-wrapper button {
+    clear: both;
+    border-radius: 2px;
+    margin: 5px 0 0 5px;
+    height: 30px;
+    width: 150px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.methods {
+    box-sizing: border-box;
+}
+
+.methods label {
+    display: block;
+    font-weight: 600;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.methods select {
+    /* background: transparent; */
+    width: 260px;
+    font-size: 16px;
+    border: 1px solid #CCC;
+    height: 34px;
+}
+
+.methods input {
+    /* background: transparent; */
+    width: 260px;
+    font-size: 17px;
+    font-weight: 600;
+    border: 1px solid #CCC;
+    height: 34px;
+}
+
+#headerModal img {
+    float: right;
+}
+
+
+/*
+=================================
+Toasts
+================================= 
+ */
+
+.toast-container {
+    left: 15%;
+    top: 20%;
+    display: block;
+    box-sizing: border-box;
+    position: fixed;
+    z-index: 25;
+    background-color: transparent;
+    min-width: 150px;
+    margin: 5px;
+    /* border: 2px solid #000; */
+}
+
+.toast {
+    margin: 10px;
+    border: 2px solid #000000;
+    background-color: #000;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    width: 200px;
+    /* transform: translateX(-25px); */
+}
+
+
+/* 
+==================
+loader
+==================
+*/
+
+@keyframes loader {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+/*
+=================================
+Table Field
+================================= 
+ */
+
+#main-part {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 5px solid #fff;
+    width: 100%;
+    height: 500px;
+    position: relative;
+    overflow: auto;
+}
+
+
+/* 
+=======================
+table
+=======================
+*/
+
+table {
+    cursor: pointer;
+    box-sizing: border-box;
+    vertical-align: middle;
+    opacity: 0;
+}
+
+th,
+td {
+    padding: 8px;
+    border: 1px solid #000;
+    font-weight: 400;
+    vertical-align: middle;
+    text-align: center;
+    color: #000;
+}
+
+th {
+    background-color: #ccc;
+    text-align: center;
+}
+
+td:hover {
+    background-color: rgb(35, 37, 35);
+    color: #fff;
+}
+
+td span {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 16px;
+}
+
+.taskDescription-display {
+    display: none;
+    text-align: left;
+}
+
+
+/* 
+=============================
+Chat
+=============================
+*/
+
+.chat-wrapper {
+    float: right;
+    width: 20%;
+}
+
+
+/* 
+=============================
+Select menu - Table
+=============================
+*/
+
+.select-wrapper {
+    border: 1px solid #000;
+    background-color: #78909c;
+    width: 250px;
+    opacity: 0;
+    transform-origin: 0px 0px 0px;
+    cursor: pointer;
+}
+
+.select-wrapper li {
+    /* cursor: pointer; */
+    min-height: 30px;
+    line-height: 1.5rem;
+    width: 100%;
+    text-align: left;
+    padding: 5px;
+}
+
+:focus {
+    outline: none;
+}
+
+.lStatus {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #fff;
+}
+
+.lSelect {
+    background-color: #78909c;
+}
+
+.lSelect:hover {
+    background-color: #CCC;
+    color: #000000;
+}

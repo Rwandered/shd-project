@@ -99,6 +99,8 @@ const setStyleContainer = container => {
 const setTaskModalPosition = () => {
     document.body.style.overflowY = 'visible';
     const formWrapper = document.querySelector('.modalWindow-wrapper');
+    const mainPart = document.getElementById('main-part');
+    console.log(mainPart)
     if (formWrapper) {
         if (document.documentElement.clientWidth <= 600) {
             document.body.style.overflowY = 'visible';
@@ -109,7 +111,7 @@ const setTaskModalPosition = () => {
         //1) получить текущию ширину окна когда она становиться меньше 600рх включаем overflow на вертикаль и меняем у модалки размеры на 
         // такие высота 580 ширина 288 и позиционирую его по центру
         formWrapper.style.left = Math.round(document.documentElement.clientWidth / 2 - formWrapper.offsetWidth / 2) + 'px';
-        // formWrapper.style.top = Math.round(formWrapper.offsetHeight / 2) + 'px';
+        formWrapper.style.top = Math.round(mainPart.offsetTop) + 'px';
     }
 };
 
@@ -359,7 +361,7 @@ const addTaskToWindow = container => {
     if (tableContainer) {
         const tableContainerHeader = tableContainer.querySelector('thead')
         userTask
-            .then(result => table.getTaskDate(result.task))
+            .then(result => table.getTaskData(result.task))
             .then(result => table.getBody(result))
             .then(result => {
                 createEvents(result);

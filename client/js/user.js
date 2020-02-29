@@ -9,6 +9,7 @@ import { createNoElementContainer } from './components/noTask.js'
 import { elementAppearance } from './actions/visibility.js';
 import { renderTaskModalWindow } from './modal/taskWindow.js'
 import { repeatingUpdate } from './actions/updateRender.js';
+import { transformTable } from './actions/transformTable.js'
 
 
 
@@ -46,5 +47,6 @@ const repeatingUpdateTask = () => repeatingUpdate(getTasks);
 document.addEventListener('DOMContentLoaded', getTasks);
 exitBtn.addEventListener('click', localAuth.stopSession);
 crTask.addEventListener('click', createTask);
+crFilter.addEventListener('click', transformTable)
 
 repeatingUpdateTask();

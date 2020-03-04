@@ -2,6 +2,7 @@ import Settings from '../requests/settings.js';
 import Toasts from './toasts.js'
 import Tasks from '../requests/tasks.js';
 import { setColorTask, updateColorTask } from '../actions/markTask.js';
+import { createChatWindow, startChat } from './chat.js';
 
 
 const settings = new Settings();
@@ -117,7 +118,8 @@ export const createEvents = tableBody => {
         }
 
         if (event.target.classList.contains('to')) {
-            console.log('Start chat');
+            console.log('Start chat-1');
+            startChat();
         }
 
         if (event.target.closest('.select')) {

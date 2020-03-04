@@ -141,6 +141,18 @@ module.exports = {
             from: path.resolve(__dirname, 'client', 'images', 'oops.png'),
             to: path.resolve(__dirname, 'client', 'dist')
         }]),
+        new CopyWebpackPlugin([{
+            from: path.resolve(__dirname, 'client', 'images', 'back.png'),
+            to: path.resolve(__dirname, 'client', 'dist')
+        }]),
+        new CopyWebpackPlugin([{
+            from: path.resolve(__dirname, 'client', 'images', 'send-mess.png'),
+            to: path.resolve(__dirname, 'client', 'dist')
+        }]),
+        new CopyWebpackPlugin([{
+            from: path.resolve(__dirname, 'client', 'images', 'attached.png'),
+            to: path.resolve(__dirname, 'client', 'dist')
+        }]),
     ],
     module: {
         rules: [{

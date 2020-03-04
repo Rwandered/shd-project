@@ -3,13 +3,13 @@ import '../styles/reset.css';
 import '../styles/common.css';
 import Loader from './components/loader.js';
 import Task from './requests/tasks.js';
-import Table from './components/table.js'
+import Table from './components/table.js';
 import LocalAuth, { getUserId } from './checking/checkAuth.js';
 import { createNoElementContainer } from './components/noTask.js'
 import { elementAppearance } from './actions/visibility.js';
 import { renderTaskModalWindow } from './modal/taskWindow.js'
 import { repeatingUpdate } from './actions/updateRender.js';
-import { transformTable } from './actions/transformTable.js'
+// import { startChat, createChatWindow } from './components/chat.js';
 
 
 
@@ -47,6 +47,6 @@ const repeatingUpdateTask = () => repeatingUpdate(getTasks);
 document.addEventListener('DOMContentLoaded', getTasks);
 exitBtn.addEventListener('click', localAuth.stopSession);
 crTask.addEventListener('click', createTask);
-crFilter.addEventListener('click', transformTable)
+// crFilter.addEventListener('click', createChatWindow)
 
 repeatingUpdateTask();

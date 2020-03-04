@@ -52,6 +52,7 @@ export const setCommonPosition = () => {
     }
 }
 
+
 export const closeWindow = (element, substrate) => {
     element.remove();
     substrate.remove();

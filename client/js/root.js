@@ -1,5 +1,5 @@
 import '../styles/reset.css';
-import '../styles/root.css';
+// import '../styles/root.css';
 import '../styles/common.css';
 import LocalAuth from './checking/checkAuth.js';
 import Toasts from './components/toasts.js'
@@ -90,10 +90,11 @@ const getTasks = async() => {
 const repeatingUpdateTask = () => repeatingUpdate(getTasks);
 
 
+document.addEventListener('DOMContentLoaded', getTasks);
 crThemeBtn.addEventListener('click', createTheme)
 crRoleBtn.addEventListener('click', createRole)
 crUserBtn.addEventListener('click', createUser)
 exitBtn.addEventListener('click', localAuth.stopSession);
-document.addEventListener('DOMContentLoaded', getTasks);
+
 
 repeatingUpdateTask();

@@ -1,6 +1,15 @@
-import { transformChatFadeOut, transformTableToRight, transformChatFadeInFromLeft, transformChatFadeInFromRight, transformTableFromLeft } from "../actions/transform.js";
+import { DOCWRAPPER } from "./constants.js";
+import {
+    transformChatFadeOut,
+    transformTableToRight,
+    transformChatFadeInFromLeft,
+    transformChatFadeInFromRight,
+    transformTableFromLeft
+} from "../actions/transform.js";
 
-export const startChat = () => {
+
+
+export const startChat = tableBody => {
     //1 проверка существует ли уже поле чата
     const chatWrapper = document.querySelector('.chat-wrapper')
     chatWrapper ?
@@ -30,7 +39,7 @@ export function createChatWindow() {
     //7 задаем пользовательские стили - то есть стили для подвала
     setCustomStyles(chatWrapper);
     //8 задаем размеры и позиционирование для ресайзе основного окна
-    // window.addEventListener('resize', () => { resizePosition(chatWrapper) });
+    window.addEventListener('resize', () => { resizePosition(chatWrapper) });
 
     return chatWrapper;
 }
@@ -38,7 +47,12 @@ export function createChatWindow() {
 
 function createChatWrapper() {
     const chatWrapper = document.createElement('div');
-    chatWrapper.classList.add('chat-wrapper')
+    chatWrapper.classList.add('chat-wrapper', 'float-right');
+    chatWrapper.style.cssText = `
+        width: 500px;
+        min-width: 50px;
+        position: relative;
+        left: 0;`
     return chatWrapper;
 }
 
@@ -102,72 +116,59 @@ const setCustomStyles = chatWrapper => {
 
 }
 
-
 const setCustomPosition = chatWrapper => {
-    const mainPart = document.getElementById('main-part');
-    mainPart.style.overflow = 'hidden';
-
-    //1 получаем основное окно
-    const docWrapper = document.documentElement;
-    //2 получаем родительский элемент
+    //1 получаем родительский элемент
     const parentElement = chatWrapper.closest('#main-part');
-    //3 задаем высоту окна чата относительно main part
+    parentElement.style.overflow = 'hidden';
+    //2 задаем высоту окна чата относительно main part
     chatWrapper.style.height = Math.round(parentElement.offsetHeight - 100) + 'px';
-    //4 далее в зависимости от размера основного окна позиционируем окно чата
-    if (docWrapper.offsetWidth <= 1650) {
-        //раз основное окно меньше чем размер таблицы и поле чата вместе
-        //то поле чата должно появляться слева, а таблица уезжать вправо
-        //4.1 обтекаем окно часто слева
-        chatWrapper.style.float = 'left';
-        //4.2 показываем окно чата слева направо
+    if (DOCWRAPPER.offsetWidth <= 1650) {
+        setPosition(chatWrapper, parentElement);
+        //показываем окно чата слева направо
         transformChatFadeInFromLeft();
-        // //4.3 задаме размер окна чата в зависимости от основного окна если уж совсем маленькое окно
-        if (docWrapper.offsetWidth < 600) {
-            chatWrapper.style.width = Math.round(parentElement.clientWidth) + 'px';
-            // chatWrapper.style.width = '270px'
-            console.log(chatWrapper.offsetWidth)
-        }
-        //4.4 задаем позиционирование окна по центру текущей области
-
-        chatWrapper.style.left = Math.round(parentElement.clientWidth / 2 - chatWrapper.offsetWidth / 2) + 'px';
-        //4.5 таблица уезжает право
-        transformTableToRight();
-        mainPart.style.overflow = ''
-
     } else {
         //если размер нормальный то просто 
         transformChatFadeInFromRight();
-
     }
 }
+
+const setPosition = (chatWrapper, parentElement, table = parentElement.querySelector('.table')) => {
+    if (!table.classList.contains('tranform')) {
+        transformTableToRight();
+    }
+    chatWrapper.classList.remove('float-right');
+    chatWrapper.style.left = Math.round(parentElement.clientWidth / 2 - chatWrapper.offsetWidth / 2) + 'px';
+    if (parentElement.clientWidth <= 520) {
+        parentElement.style.overflow = '';
+        const scrollBarWidth = parentElement.offsetWidth - parentElement.clientWidth
+        const activePartParentElement = parentElement.clientWidth - scrollBarWidth
+        chatWrapper.style.width = activePartParentElement + 'px'
+        chatWrapper.style.left = Math.round(parentElement.clientWidth / 2 - chatWrapper.offsetWidth / 2 - 5) + 'px';
+    }
+}
+
+
 
 const resizePosition = chatWrapper => {
+    chatWrapper.style.cssText = `
+                width: 500px;
+                min-width: 50px;
+                position: relative;
+                left: 0;`
+        // 1 получаем элементы с которыми будум работать
+    const parentElement = chatWrapper.closest('#main-part');
+    const table = parentElement.querySelector('.table');
 
-    const table = document.querySelector('.table')
-    console.log(table.offsetWidth)
-    if (document.documentElement.offsetWidth < 1650) {
-        chatWrapper.style.display = 'none'
-    } else {
-        chatWrapper.style.display = ''
+    if (DOCWRAPPER.offsetWidth > 1650) {
+        chatWrapper.classList.add('float-right');
+        parentElement.style.overflow = 'hidden';
+
+        if (table.classList.contains('transform')) {
+            transformTableFromLeft();
+            transformChatFadeInFromRight();
+        }
+    } else if (DOCWRAPPER.offsetWidth <= 1650) {
+        setPosition(chatWrapper, parentElement, table)
     }
+    setCustomStyles(chatWrapper);
 }
-
-// при клике на кнопку начала чата создается контейнер чата
-// и если еще еще ни разу не создавали он (контейнер) выезжает в пустойе место српава при полном экране
-// то есть ему задаются стили изначально далеко за пределами жкрана с позиционированием через трансформ
-// а его реальное положение рядом с таблицей вот он и выезжает на свое реальное положение 
-// если уже создали окно чата и кликаем по кнопке начать чат с другим пользователем, 
-// то текущее окно просто плавно исчезает и на его место 
-// появлеться новое окно чата просто уходит в display none
-// кнопка убрать будет доступна только в мобильной версии
-
-// если мобильная версия 
-// то таблица и контейнер чата будут меняться местами, а именно
-// таблица уходит вправо, а чат вылазит слева (если чата нет то он создается потом вылазит) - то
-// есть также задаем ему начальное позиционирование
-// там где начинается таблица, задаем его размер и трансформом смещает за пределы экрана,
-// потом он выезжает туду куда нужно, нажав кнопку на поле чата убрать все возвращается обратно
-
-
-//если размер экрана меньше чем 1650px скрывает чат если он создан
-//

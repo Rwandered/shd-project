@@ -2,7 +2,14 @@ import Toasts from '../components/toasts.js';
 import Settings from '../requests/settings.js';
 import { elementAppearance, elementDisappearing } from '../actions/visibility.js';
 import { createSelectField, createList, setSelectFieldStyle } from '../components/selectElement.js';
-import { createModalContainer, createModalLayer, createModalHeader, createModalBtn, setCommonEvents, setCommonPosition } from './modalComm.js';
+import {
+    createModalContainer,
+    createModalLayer,
+    createModalHeader,
+    createModalBtn,
+    setCommonEvents,
+    setCommonPosition
+} from './modalComm.js';
 
 
 const toasts = new Toasts();

@@ -5,7 +5,7 @@ export const transformTableToRight = () => {
         let stepX = 0;
         const interval = setInterval(() => {
             if (stepX >= 100) {
-                // table.style.display = 'none';
+                // table.classList.toggle('toggleToHide');
                 table.style.transform = `translateX(-200%)`
                 return clearInterval(interval)
             }
@@ -19,10 +19,10 @@ export const transformTableFromLeft = () => {
     const table = document.querySelector('.table');
     if (table && table.classList.contains('transform')) {
         let stepX = -200;
-        table.style.display = '';
+        table.classList.remove('transform');
         const interval = setInterval(() => {
             if (stepX >= 0) {
-                // chatWrapper.style.display = '';
+
                 table.style.transform = `translateX(0%)`
                 return clearInterval(interval)
             }
@@ -38,7 +38,7 @@ export const transformChatFadeInFromLeft = () => {
     if (chatWrapper) {
         let stepX = -100;
         chatWrapper.style.transform = `translateX(${stepX}%)`
-        chatWrapper.style.display = '';
+            // chatWrapper.classList.toggle('toggleToHide');
         const interval = setInterval(() => {
 
             if (stepX >= 0) {

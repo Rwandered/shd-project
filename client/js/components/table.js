@@ -24,18 +24,31 @@ export default class Table {
 
             //4) корректируем данные 
 
-            tasks.forEach(async task => {
+            //ТУТ НАДО ИЗБАВИТЬСЯ ОТ FOREACH так как это метод синхронный и не работает с промисами надо использовать for of
+            // tasks.forEach(async task => {
+            //     const taskData = await this.getTaskData(task);
+            //     //5) формируем  содержимое таблицы
+            //     const tableBody = this.getBody(taskData);
+
+
+            //     //7) добавим обработчики события для таблицы
+            //     createEvents(tableBody);
+
+            //     //8) добавлем содержимое  в таблицу
+            //     table.insertAdjacentElement('beforeend', tableBody);
+            // });
+
+            for (let task of tasks) {
+                console.log(task)
                 const taskData = await this.getTaskData(task);
                 //5) формируем  содержимое таблицы
                 const tableBody = this.getBody(taskData);
 
-
                 //7) добавим обработчики события для таблицы
                 createEvents(tableBody);
-
                 //8) добавлем содержимое  в таблицу
                 table.insertAdjacentElement('beforeend', tableBody);
-            });
+            }
             return table;
         } catch (e) {}
     }
@@ -119,7 +132,7 @@ export const createEvents = tableBody => {
 
         if (event.target.classList.contains('to')) {
             console.log('Start chat-1');
-            startChat();
+            startChat(tableBody);
         }
 
         if (event.target.closest('.select')) {

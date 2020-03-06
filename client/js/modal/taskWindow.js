@@ -6,7 +6,15 @@ import Table, { createEvents } from '../components/table.js';
 import { startValidation } from '../checking/validation.js';
 import { elementAppearance, elementDisappearing } from '../actions/visibility.js';
 import { createSelectField, createList, setSelectFieldStyle } from '../components/selectElement.js';
-import { createModalContainer, createModalLayer, createModalHeader, createModalBtn, setCommonEvents, setCommonPosition, closeWindow } from './modalComm.js';
+import {
+    createModalContainer,
+    createModalLayer,
+    createModalHeader,
+    createModalBtn,
+    setCommonEvents,
+    setCommonPosition,
+    closeWindow
+} from './modalComm.js';
 
 
 const setting = new Settings();
@@ -268,6 +276,7 @@ const createSelectUsersField = parentElement => {
 };
 
 
+// прочитать map работат ли с async
 const addListContentForExecutors = async listWrapper => {
     // listWrapper - ul -  то куда будем добавлять li
     const executors = localStorage.getItem('toUser').split(',');
@@ -277,16 +286,28 @@ const addListContentForExecutors = async listWrapper => {
         } catch (e) {}
     });
 
-    userNames.forEach(async userName => {
+    //ТУТ НАДО ИЗБАВИТЬСЯ ОТ FOREACH так как это метод синхронный и не работает с промисами надо использовать for of
+
+    // userNames.forEach(async userName => {
+    //     try {
+    //         const user = await userName;
+
+    //         const listElement = document.createElement('li');
+    //         listElement.classList.add('lContent');
+    //         const listContent = `<span>${user.name}</span>`;
+    //         listElement.insertAdjacentHTML('beforeend', listContent);
+
+    //         listWrapper.insertAdjacentElement('beforeend', listElement);
+
+    //         listElement.addEventListener('click', () => { addEventToSelectUser(event.target, user); });
+
+    //     } catch (e) {}
+    // });
+
+    for (let userName of userNames) {
         try {
             const user = await userName;
-            // console.log(await userName);
-            //тут надо создать выпадающее меню заменим елемент с id to на div выпадающего меню
-            // элементами выпадающего меню должны стать наименования пользователей, полученных в promis ах
-            // на каждом элементе списка должно быть событие клика при котором
-            // с скрытое поле toId добавляется id пользователя
-            // изначально text content на div выпадающего меню должен быть "Выберите исполнителя:"
-            //тут мы добавили элементы выпадающего списка
+
             const listElement = document.createElement('li');
             listElement.classList.add('lContent');
             const listContent = `<span>${user.name}</span>`;
@@ -297,7 +318,8 @@ const addListContentForExecutors = async listWrapper => {
             listElement.addEventListener('click', () => { addEventToSelectUser(event.target, user); });
 
         } catch (e) {}
-    });
+    }
+
 };
 
 const addEventToSelectUser = (target, user) => {

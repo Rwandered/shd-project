@@ -318,16 +318,24 @@ Chat
 =============================
 */
 
-.chat-wrapper {
+.float-right {
     float: right;
+}
+
+.chat-wrapper {
     border: 2px solid #000;
     border-radius: 5px;
     background-color: #78909c;
     margin: 5px;
     color: #fff;
-    width: 500px;
+    /* width: 500px;
     min-width: 50px;
-    position: relative;
+    position: relative; */
+    box-sizing: border-box;
+}
+
+.transform {
+    display: none;
 }
 
 .chat-wrapper img {
@@ -372,6 +380,7 @@ Chat
     padding: 5px;
     clear: both;
     height: 300px;
+    box-sizing: border-box;
 }
 
 .chat-field-text-to-send {

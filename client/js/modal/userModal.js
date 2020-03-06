@@ -1,6 +1,13 @@
 import Toasts from '../components/toasts.js';
 import Settings from '../requests/settings.js';
-import { createModalContainer, createModalLayer, createModalHeader, createModalBtn, setCommonEvents, setCommonPosition } from './modalComm.js';
+import {
+    createModalContainer,
+    createModalLayer,
+    createModalHeader,
+    createModalBtn,
+    setCommonEvents,
+    setCommonPosition
+} from './modalComm.js';
 
 const toasts = new Toasts();
 const settings = new Settings();

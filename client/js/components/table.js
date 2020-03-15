@@ -2,7 +2,7 @@ import Settings from '../requests/settings.js';
 import Toasts from './toasts.js'
 import Tasks from '../requests/tasks.js';
 import { setColorTask, updateColorTask } from '../actions/markTask.js';
-import { createChatWindow, startChat } from './chat.js';
+import { startChat } from './chat.js';
 
 
 const settings = new Settings();
@@ -23,23 +23,7 @@ export default class Table {
             table.insertAdjacentHTML('beforeend', tableHeader);
 
             //4) корректируем данные 
-
-            //ТУТ НАДО ИЗБАВИТЬСЯ ОТ FOREACH так как это метод синхронный и не работает с промисами надо использовать for of
-            // tasks.forEach(async task => {
-            //     const taskData = await this.getTaskData(task);
-            //     //5) формируем  содержимое таблицы
-            //     const tableBody = this.getBody(taskData);
-
-
-            //     //7) добавим обработчики события для таблицы
-            //     createEvents(tableBody);
-
-            //     //8) добавлем содержимое  в таблицу
-            //     table.insertAdjacentElement('beforeend', tableBody);
-            // });
-
             for (let task of tasks) {
-                console.log(task)
                 const taskData = await this.getTaskData(task);
                 //5) формируем  содержимое таблицы
                 const tableBody = this.getBody(taskData);
@@ -58,7 +42,7 @@ export default class Table {
         tableBody.classList.add('tableBody', `${setColorTask(data.status)}`);
         const tableStr = `
             <tr class="task">
-                <td class="id er">${data.id}</td>
+                <td class="id">${data.id}</td>
                 <td class="theme">${data.theme}</td>
                 <td class="from">${data.from}</td>
                 <td class="to">${data.to}</td>
@@ -69,7 +53,7 @@ export default class Table {
             <tr class="taskDescription-display taskDescription">
                 <td colspan="8">${data.description}</td>                        
             </tr>`
-
+        tableBody.dataset.taskContent = JSON.stringify(data.chatting);
         tableBody.insertAdjacentHTML('beforeend', tableStr)
         return tableBody;
     }
@@ -89,6 +73,12 @@ export default class Table {
             creationDate: customDate,
             status: task.status,
             description: task.description,
+            chatting: {
+                taskId: task._id,
+                fromUserId: task.from,
+                toUserId: task.to,
+                taskTheme: themeName.theme,
+            }
         };
         return taskData;
     }
@@ -131,8 +121,7 @@ export const createEvents = tableBody => {
         }
 
         if (event.target.classList.contains('to')) {
-            console.log('Start chat-1');
-            startChat(tableBody);
+            startChat(tableBody, event.target);
         }
 
         if (event.target.closest('.select')) {

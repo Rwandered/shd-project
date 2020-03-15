@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require('express');;
 const path = require('path');
 const config = require('config');
 const mongoose = require('mongoose');
@@ -6,6 +6,13 @@ const mongoose = require('mongoose');
 
 const PORT = config.get('port') || 5000;
 const app = express();
+
+const expressWs = require('express-ws')(app);
+
+// expressWs.getWss().on('connection', ws => {
+//     console.log('Connection has been opened...');
+//     console.log(expressWs.getWss().clients);
+// })
 
 app.use(express.json({ extended: true })); //для корректной отправки ответа от сервера
 
@@ -30,6 +37,8 @@ app.use('/opt/tasks', require('./routes/tasks.routes'))
 
 app.use('/opt/theme', require('./routes/theme.routes'))
 
+app.use('/chatting', require('./routes/chatting.routes'))
+
 
 
 async function start() {
@@ -50,6 +59,7 @@ async function start() {
         console.log('Server error', e.message);
         process.exit(1);
     }
+
 }
 
 start();

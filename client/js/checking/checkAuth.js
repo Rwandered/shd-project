@@ -13,20 +13,18 @@ export default class LocalAuth {
     checkAuth(location) {
         const userData = localStorage.getItem(this.storagename)
         if (userData) {
-            // console.log(1234)
             const userAuthData = JSON.parse(userData);
             const userToken = userAuthData.token
             if (userToken) {
                 settings.getUserById(userAuthData.userId)
                     .then(r => {
                         if (!location.includes(r.role)) {
-                            window.location.replace(`${ADDRESS}${PORT}/static/${r.role}`);
+                            window.location.replace(`http${ADDRESS}${PORT}/static/${r.role}`);
                         }
                     })
             }
         } else {
             if (window.location.pathname !== '/') {
-                // console.log(2222)
                 window.location = window.location.origin;
             }
         }

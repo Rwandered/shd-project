@@ -108,7 +108,7 @@ const setTaskModalPosition = () => {
     document.body.style.overflowY = 'visible';
     const formWrapper = document.querySelector('.modalWindow-wrapper');
     const mainPart = document.getElementById('main-part');
-    console.log(mainPart)
+    // console.log(mainPart)
     if (formWrapper) {
         if (document.documentElement.clientWidth <= 600) {
             document.body.style.overflowY = 'visible';

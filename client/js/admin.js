@@ -5,7 +5,7 @@ import Loader from './components/loader.js';
 import Task from './requests/tasks.js';
 import Table from './components/table.js'
 import LocalAuth, { getUserId } from './checking/checkAuth.js';
-import { createNoElementContainer } from './components/noTask.js'
+import { createNoElementContainer } from './components/noElement.js'
 import { elementAppearance } from './actions/visibility.js';
 import { repeatingUpdate } from './actions/updateRender.js';
 

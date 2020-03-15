@@ -36,6 +36,7 @@ export const transformTableFromLeft = () => {
 export const transformChatFadeInFromLeft = () => {
     const chatWrapper = document.querySelector('.chat-wrapper');
     if (chatWrapper) {
+        chatWrapper.dataset.chatHide = 0;
         let stepX = -100;
         chatWrapper.style.transform = `translateX(${stepX}%)`
             // chatWrapper.classList.toggle('toggleToHide');
@@ -55,6 +56,7 @@ export const transformChatFadeInFromLeft = () => {
 export const transformChatFadeInFromRight = () => {
     const chatWrapper = document.querySelector('.chat-wrapper');
     if (chatWrapper) {
+        chatWrapper.dataset.chatHide = 0;
         let stepX = 100;
         chatWrapper.style.transform = `translateX(${stepX}%)`
         chatWrapper.style.display = '';
@@ -82,6 +84,7 @@ export const transformChatFadeOut = () => {
 
             if (stepX >= 100) {
                 chatWrapper.style.display = 'none';
+                chatWrapper.dataset.chatHide = 1;
                 chatWrapper.style.transform = `translateX(100%)`
                 chatWrapper.closest('#main-part').style.overflow = ''
                 return clearInterval(interval)

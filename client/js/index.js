@@ -14,13 +14,14 @@ const regBtn = document.getElementById('regBtn');
 
 logBtn.addEventListener('click', async event => {
     try {
+        console.log(`http${ADDRESS}${PORT}/shd/auth/login`)
         event.preventDefault();
         const authFrm = document.getElementById('authFrm');
         const obj = {};
         const formData = new FormData(authFrm);
         formData.forEach((value, key) => obj[key] = value);
         const data = await fetch(
-            `${ADDRESS}${PORT}/shd/auth/login`, {
+            `http${ADDRESS}${PORT}/shd/auth/login`, {
                 method: 'POST',
                 headers: {
                     "Content-type": 'application/json'
@@ -36,7 +37,7 @@ logBtn.addEventListener('click', async event => {
             localStr.regAuth();
             // console.log(`http://localhost:5000/${result.userR}`);
             // console.log(result.userR)
-            window.location.replace(`${ADDRESS}${PORT}/static/${result.userR}`);
+            window.location.replace(`http${ADDRESS}${PORT}/static/${result.userR}`);
         }
     } catch (e) {}
 });
@@ -50,7 +51,7 @@ regBtn.addEventListener('click', async event => {
         const formData = new FormData(authFrm);
         formData.forEach((value, key) => obj[key] = value);
         const data = await fetch(
-            `${ADDRESS}${PORT}/shd/auth/register`, {
+            `http${ADDRESS}${PORT}/shd/auth/register`, {
                 method: 'POST',
                 headers: {
                     "Content-type": 'application/json'

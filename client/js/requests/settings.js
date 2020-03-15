@@ -5,7 +5,7 @@ export default class Settings {
     async getAdmins() {
         //1) get all admin user from mongodb
         try {
-            const dataAdmUser = await fetch(`${ADDRESS}${PORT}/opt/user/admin`);
+            const dataAdmUser = await fetch(`http${ADDRESS}${PORT}/opt/user/admin`);
             const resultAdmUser = await dataAdmUser.json();
             return resultAdmUser;
         } catch (e) {}
@@ -14,7 +14,7 @@ export default class Settings {
     async getUsers() {
         //2) get all user with user role from mongodb
         try {
-            const dataUser = await fetch(`${ADDRESS}${PORT}/opt/user`);
+            const dataUser = await fetch(`http${ADDRESS}${PORT}/opt/user`);
             const resultUser = await dataUser.json();
             return resultUser;
         } catch (e) {}
@@ -22,7 +22,7 @@ export default class Settings {
 
     async getUserById(userId) {
         try {
-            const dataUser = await fetch(`${ADDRESS}${PORT}/opt/user/${userId}`)
+            const dataUser = await fetch(`http${ADDRESS}${PORT}/opt/user/${userId}`)
             return await dataUser.json();
             // return user;
         } catch (e) {}
@@ -30,7 +30,7 @@ export default class Settings {
 
     async getAllTheme() {
         try {
-            const themes = await fetch(`${ADDRESS}${PORT}/opt/theme`);
+            const themes = await fetch(`http${ADDRESS}${PORT}/opt/theme`);
             return await themes.json();
         } catch (e) {}
     }
@@ -39,7 +39,7 @@ export default class Settings {
 
     async getThemeById(themeId) {
         try {
-            const dataTheme = await fetch(`${ADDRESS}${PORT}/opt/theme/${themeId}`);
+            const dataTheme = await fetch(`http${ADDRESS}${PORT}/opt/theme/${themeId}`);
             return await dataTheme.json();
         } catch (e) {}
     }
@@ -65,7 +65,7 @@ export default class Settings {
     async setUser(data) {
         try {
             const dataUsers = await fetch(
-                `${ADDRESS}${PORT}/shd/auth/register`, {
+                `http${ADDRESS}${PORT}/shd/auth/register`, {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -82,7 +82,7 @@ export default class Settings {
     async setTheme(data) {
         try {
             const dataThemes = await fetch(
-                `${ADDRESS}${PORT}/shd/create/theme`, {
+                `http${ADDRESS}${PORT}/shd/create/theme`, {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -97,10 +97,9 @@ export default class Settings {
 
 
     async updateTheme(data) {
-        // console.log(data)
         try {
             const dataThemes = await fetch(
-                `${ADDRESS}${PORT}/opt/theme/update`, {
+                `http${ADDRESS}${PORT}/opt/theme/update`, {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

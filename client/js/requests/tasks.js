@@ -8,7 +8,7 @@ export default class Task {
     //1) получить задачи
     async getAllTask() {
         try {
-            const tasks = await fetch(`${ADDRESS}${PORT}/opt/tasks`);
+            const tasks = await fetch(`http${ADDRESS}${PORT}/opt/tasks`);
             const result = await tasks.json();
             return result;
         } catch (e) {}
@@ -16,7 +16,7 @@ export default class Task {
 
     async createTask(data) {
         try {
-            const tasks = await fetch(`${ADDRESS}${PORT}/shd/create/task`, {
+            const tasks = await fetch(`http${ADDRESS}${PORT}/shd/create/task`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -38,7 +38,7 @@ export default class Task {
             const user = await settings.getUserById(id);
             // console.log(user.role);
             const tasks = await fetch(
-                `${ADDRESS}${PORT}/opt/tasks/${user.role}`, {
+                `http${ADDRESS}${PORT}/opt/tasks/${user.role}`, {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -55,7 +55,7 @@ export default class Task {
     async updateTaskStatus(id, status) {
         try {
             const dataTask = await fetch(
-                `${ADDRESS}${PORT}/opt/tasks/${id}`, {
+                `http${ADDRESS}${PORT}/opt/tasks/${id}`, {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

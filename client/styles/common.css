@@ -1,3 +1,9 @@
+@import "ubuntu.css";
+html {
+    font-family: 'Ubuntu Condensed', sans-serif;
+}
+
+
 /*
 ========================================
 Clearfix
@@ -299,16 +305,16 @@ td span {
     text-align: left;
 }
 
-.colorGreen {
-    background-color: green;
+.colorActive {
+    background-color: rgba(0, 100, 0, .6);
 }
 
-.colorGray {
+.colorClose {
     background-color: gray;
 }
 
-.colorBlue {
-    background-color: blue;
+.colorPaused {
+    background-color: rgba(95, 158, 160, .8);
 }
 
 
@@ -352,6 +358,7 @@ Chat
     padding: 5px;
     height: 20px;
     clear: both;
+    /* border-top: 2px solid #ccc; */
 }
 
 .task-theme {

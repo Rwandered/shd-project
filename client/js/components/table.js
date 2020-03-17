@@ -1,19 +1,14 @@
-import Settings from '../requests/settings.js';
 import Toasts from './toasts.js'
 import Tasks from '../requests/tasks.js';
-import { setColorTask, updateColorTask } from '../actions/markTask.js';
 import { startChat } from './chat.js';
+import { setColorTask, updateColorTask } from '../actions/markTask.js';
+import { getUserName, getThemeName } from '../actions/сaching.js';
 
-
-const settings = new Settings();
 const task = new Tasks();
 const toast = new Toasts();
 
 export default class Table {
-
     async renderTable(tasks) {
-        //tasks - массив задач
-        // console.log(tasks)
         try {
             //1) создаем таблицу
             const table = createTable();
@@ -27,10 +22,9 @@ export default class Table {
                 const taskData = await this.getTaskData(task);
                 //5) формируем  содержимое таблицы
                 const tableBody = this.getBody(taskData);
-
-                //7) добавим обработчики события для таблицы
+                //6) добавим обработчики события для таблицы
                 createEvents(tableBody);
-                //8) добавлем содержимое  в таблицу
+                //7) добавлем содержимое  в таблицу
                 table.insertAdjacentElement('beforeend', tableBody);
             }
             return table;
@@ -59,31 +53,32 @@ export default class Table {
     }
 
     async getTaskData(task) {
-        const userTo = await settings.getUserById(task.to) // на кого задача
-        const userFrom = await settings.getUserById(task.from) // на кого задача
-        const themeName = await settings.getThemeById(task.theme) // тема задачи
-        const date = new Date(task.creationDate); //дата 
-        const customDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+        try {
+            const userFrom = await getUserName(task.from) // на кого задача
+            const userTo = await getUserName(task.to)
+            const themeName = await getThemeName(task.theme) // тема задачи
+            const date = new Date(task.creationDate); //дата 
+            const customDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 
-        const taskData = {
-            id: task._id,
-            theme: themeName.theme,
-            to: userTo.name,
-            from: userFrom.name,
-            creationDate: customDate,
-            status: task.status,
-            description: task.description,
-            chatting: {
-                taskId: task._id,
-                fromUserId: task.from,
-                toUserId: task.to,
-                taskTheme: themeName.theme,
-            }
-        };
-        return taskData;
+            const taskData = {
+                id: task._id,
+                theme: themeName.theme,
+                to: userTo.name,
+                from: userFrom.name,
+                creationDate: customDate,
+                status: task.status,
+                description: task.description,
+                chatting: {
+                    taskId: task._id,
+                    fromUserId: task.from,
+                    toUserId: task.to,
+                    taskTheme: themeName.theme,
+                }
+            };
+            return taskData;
+        } catch {}
     }
 }
-
 
 const getHeader = () => {
     const header = `

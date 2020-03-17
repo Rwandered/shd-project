@@ -12,11 +12,11 @@ export function setColorTask(status) {
 function switchStatusColor(status) {
     switch (status) {
         case 'Активная':
-            return 'colorGreen'
+            return 'colorActive'
         case 'Приостановлена':
-            return 'colorBlue'
+            return 'colorPaused'
         case 'Закрыта':
-            return 'colorGray'
+            return 'colorClose'
         default:
             break;
     }

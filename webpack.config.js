@@ -156,15 +156,20 @@ module.exports = {
     ],
     module: {
         rules: [{
-            test: /\.css$/,
-            use: [{
-                loader: MiniCssExtractPlugin.loader,
-                options: {
-                    hmr: isDev,
-                    reloadAll: true
-                }
-            }, 'css-loader']
-        }]
+                test: /\.css$/,
+                use: [{
+                    loader: MiniCssExtractPlugin.loader,
+                    options: {
+                        hmr: isDev,
+                        reloadAll: true
+                    }
+                }, 'css-loader']
+            },
+            {
+                test: /\.(ttf|woff|woff2|eot)$/,
+                use: ['file-loader']
+            }
+        ]
 
     }
 }

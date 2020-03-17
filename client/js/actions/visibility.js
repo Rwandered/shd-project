@@ -6,7 +6,9 @@ const loader = new Loader();
 export const elementAppearance = (parentContainer, element, step) => {
     if (element) {
         const stepBody = step;
-        parentContainer.insertAdjacentElement('beforeend', element);
+        if ([...parentContainer.children].filter(e => e.classList.contains(element.className)).length === 0) {
+            parentContainer.insertAdjacentElement('beforeend', element);
+        }
         const interval = setInterval(() => {
             if (+element.style.opacity >= 1) {
                 clearInterval(interval);
@@ -17,7 +19,6 @@ export const elementAppearance = (parentContainer, element, step) => {
         loader.stopLoader();
     }
 }
-
 
 export const elementDisappearing = (element, step) => {
     if (element) {

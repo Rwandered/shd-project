@@ -10,17 +10,13 @@ import { elementAppearance } from './actions/visibility.js';
 import { repeatingUpdate } from './actions/updateRender.js';
 
 
-
 const loader = new Loader();
-
 const task = new Task();
 const table = new Table();
 const localAuth = new LocalAuth();
 
 
-// const location = window.location.pathname;
 localAuth.checkAuth(window.location.pathname);
-
 
 const tableField = document.getElementById('main-part');
 const exitBtn = document.getElementById('exit');
@@ -35,10 +31,8 @@ const getTasks = async() => {
     elementAppearance(tableField, formElement, 1 / 300);
 }
 
-
 const repeatingUpdateTask = () => repeatingUpdate(getTasks);
 
 document.addEventListener('DOMContentLoaded', getTasks);
 exitBtn.addEventListener('click', localAuth.stopSession);
-
 repeatingUpdateTask();

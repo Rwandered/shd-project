@@ -11,7 +11,6 @@ import { renderTaskModalWindow } from './modal/taskWindow.js'
 import { repeatingUpdate } from './actions/updateRender.js';
 
 
-
 const loader = new Loader();
 const task = new Task();
 const table = new Table();
@@ -19,7 +18,6 @@ const localAuth = new LocalAuth();
 
 
 localAuth.checkAuth(window.location.pathname);
-
 
 
 const tableField = document.getElementById('main-part');

@@ -1,5 +1,6 @@
 import Settings from '../requests/settings.js';
 import { ADDRESS, PORT } from '../requests/requestConfig.js';
+import { setCache, getCache, checkCache } from '../actions/cache.js';
 
 const settings = new Settings();
 
@@ -15,13 +16,20 @@ export default class LocalAuth {
         if (userData) {
             const userAuthData = JSON.parse(userData);
             const userToken = userAuthData.token
+
             if (userToken) {
-                settings.getUserById(userAuthData.userId)
-                    .then(r => {
-                        if (!location.includes(r.role)) {
-                            window.location.replace(`http${ADDRESS}${PORT}/static/${r.role}`);
-                        }
-                    })
+                if (checkCache(userAuthData.userId)) {
+                    const user = getCache(userAuthData.userId);
+                    window.location.replace(`http${ADDRESS}${PORT}/static/${user.role}`);
+                } else {
+                    settings.getUserById(userAuthData.userId)
+                        .then(r => {
+                            setCache(userAuthData.userId, r)
+                            if (!location.includes(r.role)) {
+                                window.location.replace(`http${ADDRESS}${PORT}/static/${r.role}`);
+                            }
+                        })
+                }
             }
         } else {
             if (window.location.pathname !== '/') {
@@ -45,7 +53,7 @@ export default class LocalAuth {
 }
 
 export const getUserId = () => {
-    const userData = JSON.parse(localStorage.getItem('userData'))
+    const userData = getCurrentUser();
     if (userData) {
         const userId = userData.userId
         return userId

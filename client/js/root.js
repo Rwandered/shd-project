@@ -35,13 +35,12 @@ const exitBtn = document.getElementById('exit');
 const createTheme = async() => {
     try {
         const modalContent = {
-                header: event.target.textContent,
-                labelName: ['Theme', 'Admin user'],
-                type: ['text', 'text'],
-                contentName: ['theme', 'adminId'],
-                modalType: 'theme',
-            }
-            // await createModalWindow(modalContent);
+            header: event.target.textContent,
+            labelName: ['Theme', 'Admin user'],
+            type: ['text', 'text'],
+            contentName: ['theme', 'adminId'],
+            modalType: 'theme',
+        }
         createThemeModalWindow(modalContent);
     } catch (e) {}
 }

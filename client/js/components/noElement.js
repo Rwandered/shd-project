@@ -1,8 +1,9 @@
-import { renderTaskModalWindow } from '../modal/taskWindow.js';
+// import { renderTaskModalWindow } from '../modal/taskWindow.js';
 import { getUserId } from '../checking/checkAuth.js';
 
 export function createNoElementContainer(parentElement, role) {
-    //1) создаем container 
+    console.log(role)
+        //1) создаем container 
     const container = createWrapper(parentElement);
     //2) add logo oops
     const logoImg = document.createElement('img')
@@ -18,7 +19,7 @@ export function createNoElementContainer(parentElement, role) {
     return container;
 }
 
-const createWrapper = parentElement => {
+const createWrapper = () => {
     const container = document.createElement('div');
     container.classList.add('oops');
     container.style.opacity = 0;
@@ -36,7 +37,7 @@ const repositionContainer = parentElement => {
 const getOppsContent = role => {
     const wrapperContent = document.createElement('div');
     wrapperContent.classList.add('wrapperContent')
-    const message = `<p>Для вас задачи не найдены...</p>`;
+    const message = `<p>Для вас данных не найдено...</p>`;
     wrapperContent.insertAdjacentHTML('beforeend', message);
     if (role === 'user') {
         const content = `<button class='btn btn-crTask'>Создать задачу</button>`
@@ -50,5 +51,5 @@ const getOppsContent = role => {
 
 const eventWatcher = parentElement => {
     const crTask = parentElement.querySelector('.btn-crTask');
-    crTask.addEventListener('click', () => { renderTaskModalWindow(getUserId(), event.target.textContent) });
+    // crTask.addEventListener('click', () => { renderTaskModalWindow(getUserId(), event.target.textContent) });
 }

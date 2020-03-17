@@ -7,10 +7,20 @@ import {
     transformTableFromLeft
 } from "../actions/transform.js";
 import { socket } from "../actions/connectionWs.js";
+import { getMessage, sendMessage } from "../actions/wsInteraction.js"
+import { createNoElementContainer } from "./noElement.js";
+import { renderChatMessage, clearChatField } from "./chatMessage.js";
 
 const createSocketEvents = () => {
     socket.addEventListener('message', event => {
         const wsAnswer = JSON.parse(event.data);
+        const chatMessageContainer = document.querySelector('.chat-message')
+
+        // wsAnswer === 'No data' ?
+        //     elementAppearance(chatMessageContainer, createNoElementContainer(chatMessageContainer, 'asd'), 1 / 300) :
+        renderChatMessage(wsAnswer, chatMessageContainer);
+        //// elementAppearance(createNoElementContainer(chatMessageContainer, 'asd'))
+        // elementAppearance(chatMessageContainer, createNoElementContainer(chatMessageContainer, 'asd'), 1 / 300);
     })
 }
 
@@ -18,7 +28,6 @@ createSocketEvents();
 
 
 export const startChat = (tableBody, param) => {
-    // var socket = new WebSocket('ws://localhost:5000/chatting/5e5e2815053d2740c676a6aa')
     // 1 проверка существует ли уже поле чата
     const chatWrapper = document.querySelector('.chat-wrapper')
     chatWrapper ?
@@ -28,13 +37,11 @@ export const startChat = (tableBody, param) => {
 
 export function createChatWindow(dataForChat, param) {
     const mainPart = document.getElementById('main-part');
-    // const tableBody = param.closest('.tableBody')
-
     //1 create chat wrapper
     const chatWrapper = createChatWrapper();
     //2 create chat header
-    const chatHeader = createChatHeader(dataForChat, param)
-        //3 create chat message
+    const chatHeader = createChatHeader(dataForChat, param);
+    //3 create chat message
     const chatMessage = createChatMessage();
     //4 create chat footer
     const chatFooter = createChatFooter();
@@ -51,10 +58,7 @@ export function createChatWindow(dataForChat, param) {
     //8 задаем размеры и позиционирование для ресайзе основного окна
     window.addEventListener('resize', () => { resizePosition(chatWrapper) });
 
-    // startSocket(socket, chatHeader);
-    // setCustomEvents()
-    getMessage(dataForChat);
-
+    getMessage(dataForChat)
     return chatWrapper;
 }
 
@@ -72,14 +76,13 @@ function createChatWrapper() {
 
 
 function createChatHeader(dataForChat, param) {
-    // console.log(JSON.parse(dataForChat.dataset.taskContent))
     //1 создали еделмент шапки для чата
     const chatHeader = document.createElement('div')
         //2 добавили класс
     chatHeader.classList.add('chat-header')
         //3 долбавили контент шапки
     const chatHeaderContent = `
-        <p class="task-theme">${JSON.parse(dataForChat.dataset.taskContent).taskTheme} - ${param.textContent}</p>
+        <p class="task-theme">${JSON.parse(dataForChat.dataset.taskContent).taskTheme}</p>
         <img class="to-back rotate" src="closeWindow.png" alt="Назад">`;
     //4 добавили в шапку контент    
     chatHeader.insertAdjacentHTML('afterbegin', chatHeaderContent);
@@ -96,6 +99,8 @@ const setChatHeaderEvents = chatHeaderItem => {
         //при клике на кнопку закрыть  - форма чата уходит вправо таблица выходит слева
         transformChatFadeOut();
         transformTableFromLeft();
+        //очистка данных чата
+        clearChatField();
     }
 }
 
@@ -130,7 +135,6 @@ const setCustomStyles = chatWrapper => {
 
     btnContainer.style.top = btnContainer.offsetHeight / 4 + 'px';
     txtField.style.width = `${chatFooter.offsetWidth - btnContainer.offsetWidth - 15}px`;
-
 }
 
 const setCustomPosition = chatWrapper => {
@@ -165,8 +169,6 @@ const setPosition = (chatWrapper, parentElement, table = parentElement.querySele
     }
 }
 
-
-
 const resizePosition = chatWrapper => {
     chatWrapper.style.cssText = `
                 width: 500px;
@@ -191,6 +193,7 @@ const resizePosition = chatWrapper => {
     setCustomStyles(chatWrapper);
 }
 
+
 const updateChatWindow = (chatWrapper, dataForChat, param) => {
     const chatHeader = chatWrapper.querySelector('.chat-header');
     const currentTaskId = JSON.parse(chatHeader.dataset.taskContent).taskId;
@@ -203,41 +206,12 @@ const updateChatWindow = (chatWrapper, dataForChat, param) => {
         }
     } else {
         chatHeader.dataset.taskContent = dataForChat.dataset.taskContent;
-
-        chatHeader.querySelector('.task-theme').textContent = `${newTaskTheme} - ${param.textContent}`;
+        chatHeader.querySelector('.task-theme').textContent = `${newTaskTheme}`;
         if (+chatWrapper.dataset.chatHide === 1) {
             setCustomPosition(chatWrapper)
         }
     }
-    // startSocket(socket, chatHeader);
-    getMessage(dataForChat);
-    //3 обновляем сообщения 
-}
 
-const getMessage = dataForChat => {
-    const taskId = JSON.parse(dataForChat.dataset.taskContent).taskId
-    if (socket.readyState === WebSocket.OPEN) {
-        const wsData = {
-            event: 'getMessage',
-            data: { taskId }
-        }
-        socket.send(JSON.stringify(wsData))
-    }
-}
-
-
-const sendMessage = dataForChat => {
-    const dataToWs = JSON.parse(dataForChat.dataset.taskContent)
-    if (socket.readyState === WebSocket.OPEN) {
-        const wsData = {
-            event: 'setMessage',
-            data: {
-                taskId: dataToWs.taskId,
-                fromUserId: dataToWs.fromUserId,
-                toUserId: dataToWs.toUserId,
-                messageBody: 'Why my task in work yet?'
-            }
-        }
-        socket.send(JSON.stringify(wsData))
-    }
+    getMessage(dataForChat)
+        //3 обновляем сообщения 
 }

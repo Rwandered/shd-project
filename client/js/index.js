@@ -35,8 +35,6 @@ logBtn.addEventListener('click', async event => {
         } else {
             const localStr = new LocalAuth(result.userId, result.jwtToken);
             localStr.regAuth();
-            // console.log(`http://localhost:5000/${result.userR}`);
-            // console.log(result.userR)
             window.location.replace(`http${ADDRESS}${PORT}/static/${result.userR}`);
         }
     } catch (e) {}
@@ -59,7 +57,6 @@ regBtn.addEventListener('click', async event => {
                 body: JSON.stringify(obj)
             });
         const result = await data.json();
-        // console.log(result);
         toast.createToastContainer(result.message);
     } catch (e) {}
 

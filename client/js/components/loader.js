@@ -1,5 +1,4 @@
 export default class Loader {
-
     startLoader(elem) {
         if (elem.querySelector('.loader')) {
             return;

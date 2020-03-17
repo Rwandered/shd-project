@@ -2,6 +2,7 @@ import Settings from '../requests/settings.js';
 import Loader from '../components/loader.js';
 import Toasts from '../components/toasts.js';
 import Task from '../requests/tasks.js';
+import { getUserName } from '../actions/сaching.js';
 import Table, { createEvents } from '../components/table.js';
 import { startValidation } from '../checking/validation.js';
 import { elementAppearance, elementDisappearing } from '../actions/visibility.js';
@@ -221,7 +222,9 @@ const addEventToSelectTheme = (listElement, selectElement, selectWrapper, item) 
             }
             //5.1.2) получаем данные для id пользователя для заполнения ячейки to
             try {
-                const user = await setting.getUserById(item.executor);
+                console.log(item.executor)
+                    // const user = await setting.getUserById(item.executor);
+                const user = await getUserName(item.executor)
 
                 to.value = user.name;
                 if (to.classList.contains('toggleToHide')) {
@@ -250,6 +253,18 @@ const addEventToSelectTheme = (listElement, selectElement, selectWrapper, item) 
         localStorage.setItem('toUser', item.executor);
     });
 };
+
+// //вынести в отдельный модуль
+// const getUserName = async id => {
+//     console.log(checkCache(id))
+//     if (checkCache(id)) {
+//         return getCache(id)
+//     } else {
+//         const user = await setting.getUserById(id)
+//         setCache(id, user)
+//         return user;
+//     }
+// }
 
 
 const createSelectUsersField = parentElement => {
@@ -282,27 +297,10 @@ const addListContentForExecutors = async listWrapper => {
     const executors = localStorage.getItem('toUser').split(',');
     const userNames = executors.map(async elem => {
         try {
-            return await setting.getUserById(elem);
+            // return await setting.getUserById(elem);
+            return await getUserName(elem);
         } catch (e) {}
     });
-
-    //ТУТ НАДО ИЗБАВИТЬСЯ ОТ FOREACH так как это метод синхронный и не работает с промисами надо использовать for of
-
-    // userNames.forEach(async userName => {
-    //     try {
-    //         const user = await userName;
-
-    //         const listElement = document.createElement('li');
-    //         listElement.classList.add('lContent');
-    //         const listContent = `<span>${user.name}</span>`;
-    //         listElement.insertAdjacentHTML('beforeend', listContent);
-
-    //         listWrapper.insertAdjacentElement('beforeend', listElement);
-
-    //         listElement.addEventListener('click', () => { addEventToSelectUser(event.target, user); });
-
-    //     } catch (e) {}
-    // });
 
     for (let userName of userNames) {
         try {
@@ -341,7 +339,8 @@ const defaultFill = async(id, container) => {
     //1) получаем поля для заполнения по умолчанию
     const defaultFields = container.querySelectorAll('.fill-default');
     //2) делаем запрос к базе для получения данных о пользователе
-    const user = await setting.getUserById(id);
+    // const user = await setting.getUserById(id);
+    const user = await getUserName(id);
     [...defaultFields][0].value = user.name;
     [...defaultFields][1].value = user._id;
     [...defaultFields][2].value = new Date().toLocaleDateString();
@@ -401,29 +400,3 @@ const addTaskToWindow = container => {
     toasts.createToastContainer('Task has been created...');
     closeWindow(container, layer);
 }
-
-// решение верхей функции через промисы без async await
-
-// if (item.executor.length == 1) {
-//     toId.value = item.executor;
-//     return setting.getUserById(item.executor)
-//         .then(user => to.value = user.email)
-//         .catch(error => console.error(error))
-// }
-
-
-//  // userNames - массив промисов
-//  const userNames = item.executor.map(elem => setting.getUserById(elem));
-//  //используем EcmaScript 2020 Promise.allSettled
-//  Promise.allSettled(userNames)
-//      .then(result => {
-//          // result - массив ресультатов промисов содержит 2 объекта - 1- статус промиса -2 его значение
-//          result.forEach(r => {
-
-//              //тут надо создать выпадающее меню заменим елемент с id to на div выпадающего меню
-//              // элементами выпадающего меню должны стать наименования пользователей, полученных в promis ах
-//              // на каждом элементе списка должно быть событие клика при котором
-//              // с скрытое поле toId добавляется id пользователя
-//              // изначально text content на div выпадающего меню должен быть "Выберите исполнителя:"
-//          });
-//      })

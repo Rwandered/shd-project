@@ -2,7 +2,7 @@ import Toasts from './toasts.js'
 import Tasks from '../requests/tasks.js';
 import { startChat } from './chat.js';
 import { setColorTask, updateColorTask } from '../actions/markTask.js';
-import { getUserName, getThemeName } from '../actions/сaching.js';
+import { getUserName, getThemeName } from '../actions/caching.js';
 
 const task = new Tasks();
 const toast = new Toasts();

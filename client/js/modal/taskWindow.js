@@ -2,7 +2,7 @@ import Settings from '../requests/settings.js';
 import Loader from '../components/loader.js';
 import Toasts from '../components/toasts.js';
 import Task from '../requests/tasks.js';
-import { getUserName } from '../actions/сaching.js';
+import { getUserName } from '../actions/caching.js';
 import Table, { createEvents } from '../components/table.js';
 import { startValidation } from '../checking/validation.js';
 import { elementAppearance, elementDisappearing } from '../actions/visibility.js';

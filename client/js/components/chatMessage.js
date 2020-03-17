@@ -3,7 +3,7 @@ import Settings from "../requests/settings.js";
 import { getUserId } from "../checking/checkAuth.js";
 import { elementAppearance } from "../actions/visibility.js";
 import { setCache, getCache, checkCache, getCaches } from '../actions/cache.js';
-import { getUserName } from "../actions/сaching.js";
+import { getUserName } from "../actions/caching.js";
 
 const loader = new Loader();
 const settings = new Settings();

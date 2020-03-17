@@ -8,17 +8,19 @@ import {
 } from "../actions/transform.js";
 import { socket } from "../actions/connectionWs.js";
 import { getMessage, sendMessage } from "../actions/wsInteraction.js"
-import { createNoElementContainer } from "./noElement.js";
+import { createNoChattingMessContainer } from "./noChattingMess.js";
 import { renderChatMessage, clearChatField } from "./chatMessage.js";
+import { elementAppearance } from "../actions/visibility.js";
 
 const createSocketEvents = () => {
     socket.addEventListener('message', event => {
         const wsAnswer = JSON.parse(event.data);
         const chatMessageContainer = document.querySelector('.chat-message')
 
-        // wsAnswer === 'No data' ?
-        //     elementAppearance(chatMessageContainer, createNoElementContainer(chatMessageContainer, 'asd'), 1 / 300) :
-        renderChatMessage(wsAnswer, chatMessageContainer);
+        wsAnswer === 'No data' ?
+            // console.log('Вывести в поле чата элемент с тем,что у нс нет данных') :
+            elementAppearance(chatMessageContainer, createNoChattingMessContainer(chatMessageContainer, ''), 1 / 300) :
+            renderChatMessage(wsAnswer, chatMessageContainer);
         //// elementAppearance(createNoElementContainer(chatMessageContainer, 'asd'))
         // elementAppearance(chatMessageContainer, createNoElementContainer(chatMessageContainer, 'asd'), 1 / 300);
     })

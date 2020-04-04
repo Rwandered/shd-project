@@ -13,20 +13,20 @@ input.inp+label:focus {
 } */
 
 input.inp:active {
-    border-bottom: 1px solid #78909c!important;
-    box-shadow: 0 1px 0 0 #78909c!important;
+  border-bottom: 1px solid #78909c!important;
+  box-shadow: 0 1px 0 0 #78909c!important;
 }
 
 input.inp {
-    color: #fff!important;
+  color: #fff!important;
 }
 
 label {
-    color: #78909c!important;
+  color: #78909c!important;
 }
 
 body {
-    background-color: #78909c!important;
+  background-color: #78909c!important;
 }
 
 
@@ -37,26 +37,26 @@ Toasts
 */
 
 .toast-container {
-    left: 70%!important;
-    top: 20%!important;
-    display: block!important;
-    box-sizing: border-box!important;
-    position: fixed!important;
-    z-index: 10000!important;
-    background-color: transparent!important;
-    min-width: 150px!important;
-    margin: 5px!important;
+  left: 70%!important;
+  top: 20%!important;
+  display: block!important;
+  box-sizing: border-box!important;
+  position: fixed!important;
+  z-index: 10000!important;
+  background-color: transparent!important;
+  min-width: 150px!important;
+  margin: 5px!important;
 }
 
 .toast {
-    margin: 10px!important;
-    border: 2px solid #000000!important;
-    background-color: #000!important;
-    border-radius: 5px!important;
-    color: rgb(255, 255, 255)!important;
-    text-align: center!important;
-    font-size: 16px!important;
-    font-weight: 600!important;
-    width: 200px!important;
-    /* transform: translateX(-25px); */
+  margin: 10px!important;
+  border: 2px solid #000000!important;
+  background-color: #000!important;
+  border-radius: 5px!important;
+  color: rgb(255, 255, 255)!important;
+  text-align: center!important;
+  font-size: 16px!important;
+  font-weight: 600!important;
+  width: 200px!important;
+  /* transform: translateX(-25px); */
 }

@@ -28,54 +28,54 @@ const exitBtn = document.getElementById('exit');
 
 
 const createTheme = async() => {
-    try {
-        const modalContent = {
-            header: event.target.textContent,
-            labelName: ['Theme', 'Admin user'],
-            type: ['text', 'text'],
-            contentName: ['theme', 'adminId'],
-            modalType: 'theme',
-        }
-        createThemeModalWindow(modalContent);
-    } catch (e) {}
+  try {
+    const modalContent = {
+      header: event.target.textContent,
+      labelName: ['Theme', 'Admin user'],
+      type: ['text', 'text'],
+      contentName: ['theme', 'adminId'],
+      modalType: 'theme',
+    }
+    createThemeModalWindow(modalContent);
+  } catch (e) {}
 }
 
 const createRole = () => {
-    try {
-        const modalContent = {
-            header: event.target.textContent,
-            labelName: ['User', 'Role'],
-            type: ['text', 'text'],
-            contentName: ['user', 'role', 'userId'],
-            modalType: 'role',
-        }
+  try {
+    const modalContent = {
+      header: event.target.textContent,
+      labelName: ['User', 'Role'],
+      type: ['text', 'text'],
+      contentName: ['user', 'role', 'userId'],
+      modalType: 'role',
+    }
 
-        createRoleModalWindow(modalContent);
-    } catch (e) {}
+    createRoleModalWindow(modalContent);
+  } catch (e) {}
 }
 
 const createUser = () => {
-    try {
-        const modalContent = {
-            header: event.target.textContent,
-            labelName: ['User name', 'Email', 'Password'],
-            type: ['text', 'password'],
-            contentName: ['user', 'email', 'password'],
-            modalType: 'user',
-        }
-        createUserModalWindow(modalContent)
-    } catch (e) {}
+  try {
+    const modalContent = {
+      header: event.target.textContent,
+      labelName: ['User name', 'Email', 'Password'],
+      type: ['text', 'password'],
+      contentName: ['user', 'email', 'password'],
+      modalType: 'user',
+    }
+    createUserModalWindow(modalContent)
+  } catch (e) {}
 }
 
 
 const getTasks = async() => {
-    loader.startLoader(tableField);
-    const result = await task.getAllTask();
+  loader.startLoader(tableField);
+  const result = await task.getAllTask();
 
-    const formElement = result.length == 0 ?
-        createNoElementContainer(tableField, '') :
-        await table.renderTable(result);
-    elementAppearance(tableField, formElement, 1 / 300);
+  const formElement = result.length == 0 ?
+    createNoElementContainer(tableField, '') :
+    await table.renderTable(result);
+  elementAppearance(tableField, formElement, 1 / 300);
 }
 
 const repeatingUpdateTask = () => repeatingUpdate(getTasks);

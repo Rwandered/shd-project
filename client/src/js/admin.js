@@ -20,13 +20,13 @@ const tableField = document.getElementById('main-part');
 const exitBtn = document.getElementById('exit');
 
 const getTasks = async() => {
-    loader.startLoader(tableField);
-    const result = await task.getTaskForRole(getUserId());
-    const formElement = result.userTasks.length == 0 ?
-        createNoElementContainer(tableField, result.userRole) :
-        await table.renderTable(result.userTasks);
+  loader.startLoader(tableField);
+  const result = await task.getTaskForRole(getUserId());
+  const formElement = result.userTasks.length == 0 ?
+    createNoElementContainer(tableField, result.userRole) :
+    await table.renderTable(result.userTasks);
 
-    elementAppearance(tableField, formElement, 1 / 300);
+  elementAppearance(tableField, formElement, 1 / 300);
 }
 
 document.addEventListener('DOMContentLoaded', getTasks);

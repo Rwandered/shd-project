@@ -23,17 +23,17 @@ const exitBtn = document.getElementById('exit');
 const crTask = document.getElementById('crTask');
 
 const getTasks = async() => {
-    loader.startLoader(tableField);
-    const result = await task.getTaskForRole(getUserId());
-    const formElement = result.userTasks.length == 0 ?
-        createNoElementContainer(tableField, result.userRole) :
-        await table.renderTable(result.userTasks);
+  loader.startLoader(tableField);
+  const result = await task.getTaskForRole(getUserId());
+  const formElement = result.userTasks.length == 0 ?
+    createNoElementContainer(tableField, result.userRole) :
+    await table.renderTable(result.userTasks);
 
-    elementAppearance(tableField, formElement, 1 / 300);
+  elementAppearance(tableField, formElement, 1 / 300);
 }
 
 const createTask = () => {
-    renderTaskModalWindow(getUserId(), event.target.textContent);
+  renderTaskModalWindow(getUserId(), event.target.textContent);
 }
 
 

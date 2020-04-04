@@ -55,13 +55,13 @@ body {
   margin: 2.8rem 0 1.68rem 0;
   font-weight: 400;
   -webkit-margin-before: 0.67em;
-          margin-block-start: 0.67em;
+  margin-block-start: 0.67em;
   -webkit-margin-after: 0.67em;
-          margin-block-end: 0.67em;
+  margin-block-end: 0.67em;
   -webkit-margin-start: 0px;
-          margin-inline-start: 0px;
+  margin-inline-start: 0px;
   -webkit-margin-end: 0px;
-          margin-inline-end: 0px;
+  margin-inline-end: 0px;
 }
 
 @media screen and (min-width: 530px) {
@@ -195,20 +195,22 @@ form .card .card-content .input-field label:not(.label-icon) {
 input.inp:focus {
   border-bottom: 1px solid #00a7fa !important;
   -webkit-box-shadow: 0 1px 0 0 #78909c !important;
-          box-shadow: 0 1px 0 0 #78909c !important;
+  box-shadow: 0 1px 0 0 #78909c !important;
 }
+
 
 /*            
 ===========================
 Toasts
 ===========================
 */
+
 .toast-container {
   left: 15% !important;
   top: 20% !important;
   display: block !important;
   -webkit-box-sizing: border-box !important;
-          box-sizing: border-box !important;
+  box-sizing: border-box !important;
   position: fixed !important;
   z-index: 10000 !important;
   background-color: transparent !important;
@@ -227,4 +229,6 @@ Toasts
   font-weight: 600 !important;
   width: 200px !important;
 }
+
+
 /*# sourceMappingURL=styles.css.map */

@@ -8,16 +8,16 @@ export const getThemeName = async id => checkCache(id) ? getCache(id) : await cr
 
 
 const createCacheData = async(id, type) => {
-    let data;
-    switch (type) {
-        case 'user':
-            data = await settings.getUserById(id)
-            setCache(id, data)
-            break;
-        case 'theme':
-            data = await settings.getThemeById(id)
-            setCache(id, data)
-            break
-    }
-    return data;
+  let data;
+  switch (type) {
+    case 'user':
+      data = await settings.getUserById(id)
+      setCache(id, data)
+      break;
+    case 'theme':
+      data = await settings.getThemeById(id)
+      setCache(id, data)
+      break
+  }
+  return data;
 }

@@ -9,10 +9,6 @@ const app = express();
 
 const expressWs = require('express-ws')(app);
 
-// expressWs.getWss().on('connection', ws => {
-//     console.log('Connection has been opened...');
-//     console.log(expressWs.getWss().clients);
-// })
 
 app.use(express.json({ extended: true })); //для корректной отправки ответа от сервера
 
@@ -37,7 +33,7 @@ app.use('/opt/tasks', require('./routes/tasks.routes'))
 
 app.use('/opt/theme', require('./routes/theme.routes'))
 
-app.use('/chatting', require('./routes/chatting.routes'))
+app.use('/chatting', require('./routes/websocket.routes'))
 
 
 

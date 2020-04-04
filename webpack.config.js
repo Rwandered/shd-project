@@ -14,9 +14,9 @@ const isProd = !isDev;
 
 const optimization = () => {
     const config = {
-        splitChunks: {
-            chunks: 'all'
-        }
+        // splitChunks: {
+        //     chunks: 'all'
+        // }
     }
     if (isProd) {
         config.minimizer = [
@@ -68,10 +68,10 @@ const plugins = () => {
 module.exports = {
     mode: 'production',
     entry: {
-        main: './client/js/index.js',
-        admin: './client/js/admin.js',
-        root: './client/js/root.js',
-        user: './client/js/user.js'
+        main: './client/src/js/index.js',
+        admin: './client/src/js/admin.js',
+        root: './client/src/js/root.js',
+        user: './client/src/js/user.js'
     },
     output: {
         filename: '[name].js',
@@ -80,13 +80,13 @@ module.exports = {
     watchOptions: {
         ignored: /node_modules/
     },
-    // optimization: optimization(),
+    optimization: optimization(),
     plugins: [
         new HtmlWebpackPlugin({
             template: './client/index.html',
             chunks: ['main'],
             minify: {
-                // collapseWhitespace: isProd
+                collapseWhitespace: isProd
             }
 
         }),
@@ -95,7 +95,7 @@ module.exports = {
             filename: 'root.html',
             chunks: ['root'],
             minify: {
-                // collapseWhitespace: isProd
+                collapseWhitespace: isProd
             }
         }),
         new HtmlWebpackPlugin({
@@ -103,7 +103,7 @@ module.exports = {
             filename: 'user.html',
             chunks: ['user'],
             minify: {
-                // collapseWhitespace: isProd
+                collapseWhitespace: isProd
             }
         }),
         new HtmlWebpackPlugin({
@@ -111,7 +111,7 @@ module.exports = {
             filename: 'admin.html',
             chunks: ['admin'],
             minify: {
-                // collapseWhitespace: isProd
+                collapseWhitespace: isProd
             }
         }),
         new CleanWebpackPlugin(),
@@ -126,31 +126,39 @@ module.exports = {
 
         ]),
         new CopyWebpackPlugin([{
-            from: path.resolve(__dirname, 'client', 'images', 'closeWindow.png'),
+            from: path.resolve(__dirname, 'client', 'src', 'images', 'closeWindow.png'),
             to: path.resolve(__dirname, 'client', 'dist')
         }]),
         new CopyWebpackPlugin([{
-            from: path.resolve(__dirname, 'client', 'images', 'down-squared.png'),
+            from: path.resolve(__dirname, 'client', 'src', 'images', 'down-squared.png'),
             to: path.resolve(__dirname, 'client', 'dist')
         }]),
         new CopyWebpackPlugin([{
-            from: path.resolve(__dirname, 'client', 'images', 'logo-image.png'),
+            from: path.resolve(__dirname, 'client', 'src', 'images', 'logo-image.png'),
             to: path.resolve(__dirname, 'client', 'dist')
         }]),
         new CopyWebpackPlugin([{
-            from: path.resolve(__dirname, 'client', 'images', 'oops.png'),
+            from: path.resolve(__dirname, 'client', 'src', 'images', 'oops.png'),
             to: path.resolve(__dirname, 'client', 'dist')
         }]),
         new CopyWebpackPlugin([{
-            from: path.resolve(__dirname, 'client', 'images', 'back.png'),
+            from: path.resolve(__dirname, 'client', 'src', 'images', 'back.png'),
             to: path.resolve(__dirname, 'client', 'dist')
         }]),
         new CopyWebpackPlugin([{
-            from: path.resolve(__dirname, 'client', 'images', 'send-mess.png'),
+            from: path.resolve(__dirname, 'client', 'src', 'images', 'send-mess.png'),
             to: path.resolve(__dirname, 'client', 'dist')
         }]),
         new CopyWebpackPlugin([{
-            from: path.resolve(__dirname, 'client', 'images', 'attached.png'),
+            from: path.resolve(__dirname, 'client', 'src', 'images', 'attached.png'),
+            to: path.resolve(__dirname, 'client', 'dist')
+        }]),
+        new CopyWebpackPlugin([{
+            from: path.resolve(__dirname, 'client', 'src', 'images', 'chatting.png'),
+            to: path.resolve(__dirname, 'client', 'dist')
+        }]),
+        new CopyWebpackPlugin([{
+            from: path.resolve(__dirname, 'client', 'src', 'images', 'no-message.png'),
             to: path.resolve(__dirname, 'client', 'dist')
         }]),
     ],

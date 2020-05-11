@@ -8,6 +8,7 @@ const PORT = config.get('port') || 5000;
 const app = express();
 
 const expressWs = require('express-ws')(app);
+// "mongoUri": "mongodb+srv://rwandered:Mkiol<90789!@cluster0-jrsv0.azure.mongodb.net/shd-poject?retryWrites=true&w=majority",
 
 
 app.use(express.json({ extended: true })); //для корректной отправки ответа от сервера
@@ -38,23 +39,23 @@ app.use('/chatting', require('./routes/websocket.routes'))
 
 
 async function start() {
-  try {
-    await mongoose.connect(config.get('mongoUri'), {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false
+    try {
+        await mongoose.connect(config.get('mongoUri'), {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useCreateIndex: true,
+            useFindAndModify: false
 
-    });
+        });
 
-    app.listen(PORT, () => {
-      console.log(`Server has been started on PORT ${PORT}`);
-    });
+        app.listen(PORT, () => {
+            console.log(`Server has been started on PORT ${PORT}`);
+        });
 
-  } catch (e) {
-    console.log('Server error', e.message);
-    process.exit(1);
-  }
+    } catch (e) {
+        console.log('Server error', e.message);
+        process.exit(1);
+    }
 
 }
 

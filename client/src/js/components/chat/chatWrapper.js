@@ -168,7 +168,8 @@ const sendTextChatMessage = chatWrapper => {
 
   if (messageField.value === '') return;
   const chatMessageContainers = document.querySelectorAll('.chat-message');
-  const [chatMessageContainer] = [...chatMessageContainers].filter(elem => (elem.dataset.messageTaskId === dataTaskContent.taskId));
+  // const [chatMessageContainer] = [...chatMessageContainers].filter(elem => (elem.dataset.messageTaskId === dataTaskContent.taskId));
+  const chatMessageContainer = [...chatMessageContainers].find(elem => (elem.dataset.messageTaskId === dataTaskContent.taskId));
 
   const messageContent = messageField.value;
   messageField.value = '';

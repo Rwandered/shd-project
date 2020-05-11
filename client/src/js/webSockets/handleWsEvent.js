@@ -9,7 +9,8 @@ import { displayNewStatusTask } from "../components/tasks/actionsWithTasks/displ
 export const handleWsEvent = wsEvent => {
   const wsAnswer = JSON.parse(wsEvent.data);
   const chatMessageContainers = document.querySelectorAll('.chat-message');
-  const [chatMessageContainer] = [...chatMessageContainers].filter(elem => (elem.dataset.messageTaskId === wsAnswer.taskId));
+  // const [chatMessageContainer] = [...chatMessageContainers].filter(elem => (elem.dataset.messageTaskId === wsAnswer.taskId));
+  const chatMessageContainer = [...chatMessageContainers].find(elem => (elem.dataset.messageTaskId === wsAnswer.taskId));
 
   switch (wsAnswer.event) {
     case 'getMessage':

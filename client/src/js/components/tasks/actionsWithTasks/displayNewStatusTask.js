@@ -3,7 +3,9 @@ import Toasts from "../../toasts/toasts";
 
 export const displayNewStatusTask = wsAnswer => {
   const tableBodies = document.querySelectorAll('.tableBody')
-  const [tableBody] = [...tableBodies].filter(tableBody => JSON.parse(tableBody.dataset.taskContent).taskId === wsAnswer.taskId)
+    // const [tableBody] = [...tableBodies].filter(tableBody => JSON.parse(tableBody.dataset.taskContent).taskId === wsAnswer.taskId)
+  const tableBody = [...tableBodies].find(tableBody => JSON.parse(tableBody.dataset.taskContent).taskId === wsAnswer.taskId)
+
   const statusField = tableBody.querySelector('.status');
   statusField.textContent = wsAnswer.data;
   updateColorTask(statusField);

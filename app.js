@@ -8,7 +8,7 @@ const PORT = config.get('port') || 5000;
 const app = express();
 
 const expressWs = require('express-ws')(app);
-// "mongoUri": "mongodb+srv://rwandered:Mkiol<90789!@cluster0-jrsv0.azure.mongodb.net/shd-poject?retryWrites=true&w=majority",
+// "mongoUri": "mongodb+srv://rwandered:<pwd>@cluster0-jrsv0.azure.mongodb.net/shd-poject?retryWrites=true&w=majority",
 
 
 app.use(express.json({ extended: true })); //для корректной отправки ответа от сервера

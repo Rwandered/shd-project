@@ -32,7 +32,7 @@ export const createModalBtn = headerName => {
 
 
 export const setCommonEvents = (element, substrate) => {
-  element.addEventListener('click', () => {
+  element.addEventListener('click', (event) => {
     if (event.target.tagName == 'IMG') {
       closeWindow(element, substrate);
     }

@@ -44,7 +44,6 @@ export const createThemeModalWindow = modalContent => {
 
 
 const createRoleModal = modalContent => {
-  // console.log(modalContent)
   const themeModalContent = `
     <form action="" class="methods">
         <label for="${modalContent.contentName[0]}">${modalContent.labelName[0]}</label>
@@ -79,10 +78,6 @@ const setThemeModalEvents = element => {
 
 
 const createSelectThemeField = parentElement => {
-  // console.log(parentElement)
-  // parentElement - относительно чего создавать элемент списка - по чему произошел клик
-  // rootElement - основной контейнер модального окна
-  // основной контейнер модального окна
   const rootElement = document.querySelector('.modalWindow-wrapper');
   //1) создаем оболочку выпадающего списка
   const selectItemsWrapper = createSelectField();

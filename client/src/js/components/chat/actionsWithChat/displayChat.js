@@ -7,7 +7,6 @@ import { clearChatMessageCounter } from "./changeMessageCounter.js"
 export const showChat = (dataForChat, tdCounter) => {
     const chatWrapper = document.querySelector('.chat-wrapper')
     const mainWrapper = chatWrapper.closest('#main-part')
-        // const table = mainWrapper.querySelector('.table')
     const docWrapperSizeWidth = DOCWRAPPER.offsetWidth;
 
     updateChatHeader(chatWrapper, dataForChat)
@@ -17,10 +16,9 @@ export const showChat = (dataForChat, tdCounter) => {
         chatWrapper.style.opacity = 1;
         chatWrapper.style.display = '';
         setChatWrapperPosition(chatWrapper, mainWrapper);
-        //показываем окно чата слева направо
-        transformChatFadeInFromLeft() // задаем анимацию в поялвении окна чата
+
+        transformChatFadeInFromLeft()
     } else {
-        // если размер нормальный то просто 
         setDefaultChatWrapperStyles()
         transformChatFadeInFromRight();
     }
@@ -29,7 +27,6 @@ export const showChat = (dataForChat, tdCounter) => {
 
 
 export const setChatWrapperPosition = (chatWrapper, parentElement, table = parentElement.querySelector('.table')) => {
-    //если таблица скрыта, покажем ее
     if (!table.classList.contains('tranform')) {
         transformTableToRight();
     }
@@ -47,7 +44,7 @@ export const setChatWrapperPosition = (chatWrapper, parentElement, table = paren
 
 
 export const setCustomFooterStyles = chatWrapper => {
-    //в этом методе задаются стили для позиционирования элементов внутри chatField
+
     const chatFooter = chatWrapper.querySelector('.chat-footer');
     const txtField = chatFooter.querySelector('.chat-field-text-to-send')
     const btnContainer = chatFooter.querySelector('.chat-btn')
@@ -82,10 +79,6 @@ const showChatMessage = (chatWrapper, dataForChat) => {
         return chatMess.dataset.messageTaskId === taskId
     })
 
-    // const chatMessage = chatMessages.find(chatMess => {
-    //   chatMess.style.display = 'none'; // делает дисплей нон всем  элементам
-    //   return chatMess.dataset.messageTaskId === taskId
-    // })
     chatMessage.style.display = '';
     chatMessage.scrollTop = chatMessage.scrollHeight
 }

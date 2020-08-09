@@ -34,7 +34,7 @@ export const newTaskToWs = task => {
 }
 
 export const newTaskStatusToWs = data => {
-  // console.log(data)
+
   if (socket.readyState === WebSocket.OPEN) {
     const wsData = {
       event: 'newTaskStatus',

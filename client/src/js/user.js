@@ -22,7 +22,7 @@ const tableField = document.getElementById('main-part');
 const exitBtn = document.getElementById('exit');
 const crTask = document.getElementById('crTask');
 
-const getTasks = async() => {
+const getTasks = async () => {
   loader.startLoader(tableField);
   const result = await task.getTaskForRole(getUserId());
   const formElement = result.userTasks.length == 0 ?
@@ -32,7 +32,7 @@ const getTasks = async() => {
   elementAppearance(tableField, formElement, 1 / 300);
 }
 
-const createTask = () => {
+const createTask = (event) => {
   renderTaskModalWindow(getUserId(), event.target.textContent);
 }
 

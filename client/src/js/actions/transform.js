@@ -5,7 +5,6 @@ export const transformTableToRight = () => {
     let stepX = 0;
     const interval = setInterval(() => {
       if (stepX >= 100) {
-        // table.classList.toggle('toggleToHide');
         table.style.transform = `translateX(-200%)`
         table.closest('#main-part').style.overflow = 'hidden'
         return clearInterval(interval)

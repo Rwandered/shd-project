@@ -1,5 +1,4 @@
 import { startChat } from "../../chat/chat";
-// import { rePositionChatWrapper } from "../../chat/actionsWithChat/displayChat";
 import { elementAppearance, elementDisappearing } from '../../../actions/visibility.js';
 import Table, { createEvents } from "../../table/table";
 import Toasts from "../../toasts/toasts";

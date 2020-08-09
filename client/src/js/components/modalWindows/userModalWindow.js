@@ -38,8 +38,6 @@ export const createUserModalWindow = modalContent => {
   setCommonEvents(modalContainer, modalLayer);
   //10) вешаем кастомные события
   setUserModalEvents(modalContainer)
-
-  // console.log(modalContainer)
 }
 
 const createUserModal = modalContent => {

@@ -2,14 +2,14 @@ const express = require('express');;
 const path = require('path');
 const config = require('config');
 const mongoose = require('mongoose');
+// require('custom-env').env();
 
 
 const PORT = config.get('port') || 5000;
 const app = express();
 
-const expressWs = require('express-ws')(app);
-// "mongoUri": "mongodb+srv://rwandered:<pwd>@cluster0-jrsv0.azure.mongodb.net/shd-poject?retryWrites=true&w=majority",
 
+const expressWs = require('express-ws')(app);
 
 app.use(express.json({ extended: true })); //для корректной отправки ответа от сервера
 
@@ -40,7 +40,7 @@ app.use('/chatting', require('./routes/websocket.routes'))
 
 async function start() {
     try {
-        await mongoose.connect(config.get('mongoUri'), {
+        await mongoose.connect( config.get('mongoUri'), {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true,

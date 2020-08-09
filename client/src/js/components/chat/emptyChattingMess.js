@@ -1,12 +1,9 @@
 import { createWrapper, repositionContainer } from "../emptyData/noElement";
 
 export function createNoChattingMessContainer(parentElement) {
-  //1) создаем container 
-  const container = createWrapper();
+   const container = createWrapper();
   container.className = 'no-mess'
-    //2) add logo oops
   const logoImg = createLogoImageOppsNoMess();
-  //3) добавляем другие элементы в зависимости от роли
   const content = getOppsContent();
 
   container.insertAdjacentElement('beforeend', logoImg);
@@ -14,10 +11,9 @@ export function createNoChattingMessContainer(parentElement) {
   parentElement.insertAdjacentElement('beforeend', container);
 
   repositionContainer(parentElement, container);
-
-  parentElement.style.display = 'none'; ///*/****************************** */
-
+  parentElement.style.display = 'none';
   container.style.opacity = 1;
+
   return container;
 }
 

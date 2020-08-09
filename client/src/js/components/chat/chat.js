@@ -10,7 +10,6 @@ createSocketEvents();
 
 
 export const startChat = tableBody => {
-  // 1 проверка существует ли уже поле чата
   const chatWrapper = document.querySelector('.chat-wrapper')
   chatWrapper ?
     addNewChatMessage(chatWrapper, tableBody) :

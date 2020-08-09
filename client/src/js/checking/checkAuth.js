@@ -16,7 +16,6 @@ export default class LocalAuth {
         const userData = localStorage.getItem(this.storagename)
         if (userData) {
             const userAuthData = JSON.parse(userData);
-            // const userToken =
 
             if (userAuthData.token) {
                 if (checkCache(userAuthData.userId)) {

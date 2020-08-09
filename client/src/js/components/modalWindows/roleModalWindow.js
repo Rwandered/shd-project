@@ -13,38 +13,25 @@ import {
 
 
 
-
-
 const toasts = new Toasts();
 const settings = new Settings();
 
 export const createRoleModalWindow = modalContent => {
-  // 1) создаем контейнер
+
   const modalContainer = createModalContainer();
-  //2) создаем layer
   const modalLayer = createModalLayer();
-  //3) созадем заголовок для модального окна
   const modalHeader = createModalHeader(modalContent.header);
-  // 4) создаем модальное окно для задания роли
   const roleModal = createRoleModal(modalContent);
-  //5) создаем элементы управления в модальном окне кнопки
   const modalBtn = createModalBtn(modalContent.header);
 
-  //6) собираем все в контейнер 
   modalContainer.insertAdjacentHTML('beforeend', modalHeader);
   modalContainer.insertAdjacentHTML('beforeend', roleModal);
   modalContainer.insertAdjacentElement('beforeend', modalBtn);
 
-  //7) выводим все на экран
   document.body.insertAdjacentElement('beforeend', modalContainer);
-  //8) задаем позиционирование контейнера общее
   setCommonPosition();
-  //9) вешаем общие события
   setCommonEvents(modalContainer, modalLayer);
-  //10) вешаем кастомные события
   setRoleModalEvents(modalContainer)
-
-  // console.log(modalContainer)
 }
 
 
@@ -70,10 +57,9 @@ const createRoleModal = modalContent => {
 const setRoleModalEvents = element => {
   element.addEventListener('click', () => {
     if (event.target.tagName == 'BUTTON') {
-      // console.log(event.target)
+
       createNewRole(element);
     } else if (event.target.closest('.select-item')) {
-      //тут навешивается событие по созданию выпадающего меню
       const selectItem = event.target.closest('.select-item');
       createSelectUserField(selectItem);
     }
@@ -86,32 +72,24 @@ const createSelectUserField = parentElement => {
   // rootElement - основной контейнер модального окна
   // основной контейнер модального окна
   const rootElement = document.querySelector('.modalWindow-wrapper');
-  //1) создаем оболочку выпадающего списка
   const selectItemsWrapper = createSelectField();
-  //2) создаем элементы списка - сюда придет ul + li (заголовок)
   const listWrapper = createList();
-  //3) Создаем индивидуальный контент в элемент списка
+
   parentElement.closest('.select-users') ?
     addListContentForUsers(listWrapper) :
     addListContentForRoles(listWrapper, parentElement);
 
   selectItemsWrapper.insertAdjacentElement('beforeend', listWrapper);
-  //4) задаем стили контейнеру
   setSelectFieldStyle(selectItemsWrapper, parentElement);
-  //5) Показываем элемент
   elementAppearance(rootElement, selectItemsWrapper, 2 / 100);
-  //6) Фокусируемся на элементе
   selectItemsWrapper.focus();
-  //7) Устанавливаем событие потери фокуса - элемент исчезает
+
   selectItemsWrapper.addEventListener('focusout', () => { elementDisappearing(event.target, 2 / 100); });
 }
 
 
 
 const addListContentForRoles = (listWrapper, targetItem) => {
-  // listWrapper - элементы выпадающего меню
-  // targetItem - элемент по которому кликнули
-  // console.log(listWrapper);
   const roleContent = `
         <li class="lContent"><span>Admin</span></li>
         <li class="lContent"><span>Root</span></li>

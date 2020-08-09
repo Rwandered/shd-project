@@ -18,8 +18,7 @@ export const renderChatMessage = async(wsAnswer, parentElement) => {
     //3 create message container
     await createMessageContainer(wsAnswerToDate, dateChatContainer, parentElement);
   }
-  // await (parentElement.style.display = 'none');
-  // elementAppearance(chatWrapper, parentElement, 5 / 300);
+
 }
 
 

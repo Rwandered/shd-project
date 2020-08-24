@@ -50,7 +50,7 @@ const getDateChatContainer = (date, parentElement) => {
   const dateChatContainers = parentElement.querySelectorAll('.date-chat-container')
   const dateChatContainer = [...dateChatContainers].filter(container => container.dataset.taskDate === date)
 
-  if (dateChatContainer.length != 0) {
+  if (dateChatContainer.length !== 0) {
     return dateChatContainer[0];
   }
   return createDateChatContainer(date, parentElement);

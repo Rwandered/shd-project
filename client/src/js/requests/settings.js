@@ -1,4 +1,4 @@
-import { PORT, ADDRESS } from "./requestConfig";
+import {ADDRESS, PORT} from "./requestConfig";
 
 export default class Settings {
 
@@ -6,8 +6,8 @@ export default class Settings {
     //1) get all admin user from mongodb
     try {
       const dataAdmUser = await fetch(`http${ADDRESS}${PORT}/opt/user/admin`);
-      const resultAdmUser = await dataAdmUser.json();
-      return resultAdmUser;
+      return await dataAdmUser.json();
+
     } catch (e) {}
   }
 
@@ -15,8 +15,8 @@ export default class Settings {
     //2) get all user with user role from mongodb
     try {
       const dataUser = await fetch(`http${ADDRESS}${PORT}/opt/user`);
-      const resultUser = await dataUser.json();
-      return resultUser;
+      return await dataUser.json();
+
     } catch (e) {}
   }
 
@@ -24,7 +24,7 @@ export default class Settings {
     try {
       const dataUser = await fetch(`http${ADDRESS}${PORT}/opt/user/${userId}`)
       return await dataUser.json();
-      // return user;
+
     } catch (e) {}
   }
 
@@ -55,8 +55,7 @@ export default class Settings {
           },
           body: JSON.stringify(data)
         });
-      const resultRoles = await dataRoles.json();
-      return resultRoles;
+      return await dataRoles.json();
 
     } catch (e) {}
   }
@@ -72,8 +71,7 @@ export default class Settings {
           },
           body: JSON.stringify(data)
         });
-      const resultUsers = await dataUsers.json();
-      return resultUsers;
+      return await dataUsers.json();
 
     } catch (e) {}
   }
@@ -89,8 +87,7 @@ export default class Settings {
           },
           body: JSON.stringify(data)
         });
-      const resultThemes = await dataThemes.json();
-      return resultThemes;
+      return await dataThemes.json();
     } catch (e) {}
   }
 }

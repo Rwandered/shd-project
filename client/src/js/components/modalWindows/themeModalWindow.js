@@ -1,12 +1,12 @@
 import Toasts from '../toasts/toasts.js';
 import Settings from '../../requests/settings.js';
-import { elementAppearance, elementDisappearing } from '../../actions/visibility.js';
-import { createSelectField, createList, setSelectFieldStyle } from '../select/selectElement.js';
+import {elementAppearance, elementDisappearing} from '../../actions/visibility.js';
+import {createList, createSelectField, setSelectFieldStyle} from '../select/selectElement.js';
 import {
-  createModalContainer,
-  createModalLayer,
-  createModalHeader,
   createModalBtn,
+  createModalContainer,
+  createModalHeader,
+  createModalLayer,
   setCommonEvents,
   setCommonPosition
 } from './modalCommon.js';
@@ -44,7 +44,7 @@ export const createThemeModalWindow = modalContent => {
 
 
 const createRoleModal = modalContent => {
-  const themeModalContent = `
+  return `
     <form action="" class="methods">
         <label for="${modalContent.contentName[0]}">${modalContent.labelName[0]}</label>
         <div class="select-themes select-item">
@@ -60,13 +60,12 @@ const createRoleModal = modalContent => {
         </div>
         <input type="${modalContent.type[1]}" name="${modalContent.contentName[1]}" id="${modalContent.contentName[1]}" hidden>
     </form>`;
-  return themeModalContent;
 }
 
 
 const setThemeModalEvents = element => {
-  element.addEventListener('click', () => {
-    if (event.target.tagName == 'BUTTON') {
+  element.addEventListener('click', (event) => {
+    if (event.target.tagName === 'BUTTON') {
       createNewTheme(element);
     }
     if (event.target.closest('.select-item')) {
@@ -190,14 +189,15 @@ const addEventToSelectUsers = (target, item) => {
 const createNewTheme = async element => {
   const formSend = element.querySelector('.methods');
   // если текстовый элемент скрыт   
-  (formSend.elements.theme.classList.contains('toggleToHide')) ?
-  setTheme({
-    themeId: formSend.elements.themeId.value,
-    userId: formSend.elements.adminId.value,
-  }): setTheme({
-    themeName: formSend.elements.theme.value,
-    userId: formSend.elements.adminId.value,
-  })
+  (formSend.elements.theme.classList.contains('toggleToHide'))
+    ? await setTheme({
+        themeId: formSend.elements.themeId.value,
+        userId: formSend.elements.adminId.value,
+      })
+    : await setTheme({
+        themeName: formSend.elements.theme.value,
+        userId: formSend.elements.adminId.value,
+      })
 }
 
 const setTheme = async obj => {

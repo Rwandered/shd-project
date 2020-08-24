@@ -1,6 +1,7 @@
 export const createModalContainer = () => {
   const modalContainer = document.createElement('div');
   modalContainer.classList.add('modalWindow-wrapper');
+
   return modalContainer;
 };
 
@@ -9,16 +10,16 @@ export const createModalLayer = () => {
   modalLayer.classList.add('bg-layer-true');
   document.body.insertAdjacentElement('beforebegin', modalLayer);
   modalLayer.classList.toggle('bg-layer');
+
   return modalLayer;
 };
 
 export const createModalHeader = headerName => {
-  const modalHeader = `
+  return `
         <div id="headerModal">
             <p>${headerName}</p>
             <img src="closeWindow.png" alt="Close">               
         </div> `;
-  return modalHeader;
 };
 
 
@@ -33,7 +34,7 @@ export const createModalBtn = headerName => {
 
 export const setCommonEvents = (element, substrate) => {
   element.addEventListener('click', (event) => {
-    if (event.target.tagName == 'IMG') {
+    if (event.target.tagName === 'IMG') {
       closeWindow(element, substrate);
     }
   });

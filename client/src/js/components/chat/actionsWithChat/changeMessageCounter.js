@@ -1,6 +1,5 @@
 export const changeMessCounter = wsAnswerData => {
 
-
   const chatMessages = document.querySelectorAll('.chat-message')
   const chatMessage = [...chatMessages].find(chatMessage => chatMessage.dataset.messageTaskId === wsAnswerData.taskId)
 

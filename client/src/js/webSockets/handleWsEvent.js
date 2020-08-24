@@ -24,11 +24,10 @@ export const handleWsEvent = wsEvent => {
       break;
     case 'newTask':
       const [userTask] = wsAnswer.data
-        // console.log(userTask)
+
       displayNewTask(userTask);
       break;
     case 'newTaskStatus':
-      // console.log(wsAnswer)
       displayNewStatusTask(wsAnswer)
       break;
   }

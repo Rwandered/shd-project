@@ -3,6 +3,7 @@ import { elementAppearance, elementDisappearing } from '../../../actions/visibil
 import Table, { createEvents } from "../../table/table";
 import Toasts from "../../toasts/toasts";
 
+
 export const displayNewTask = userTask => {
   const table = new Table()
   const tableField = document.getElementById('main-part');

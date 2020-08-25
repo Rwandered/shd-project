@@ -1,5 +1,3 @@
-import '../styles/css/reset.css';
-import '../styles/css/common.css';
 import Task from './requests/tasks.js';
 import Table from './components/table/table.js';
 import LocalAuth from './checking/checkAuth.js';
@@ -10,8 +8,8 @@ import { createNoElementContainer } from './components/tasks/emptyTaskField.js';
 import { createRoleModalWindow } from './components/modalWindows/roleModalWindow.js';
 import { createThemeModalWindow } from './components/modalWindows/themeModalWindow.js';
 import { createUserModalWindow } from './components/modalWindows/userModalWindow.js';
-
-
+import '../styles/css/reset.css';
+import '../styles/css/common.css';
 
 const localAuth = new LocalAuth();
 const loader = new Loader();
@@ -27,7 +25,7 @@ const tableField = document.getElementById('main-part');
 const exitBtn = document.getElementById('exit');
 
 
-const createTheme = async() => {
+const createTheme = async (event) => {
   try {
     const modalContent = {
       header: event.target.textContent,
@@ -40,7 +38,7 @@ const createTheme = async() => {
   } catch (e) {}
 }
 
-const createRole = () => {
+const createRole = (event) => {
   try {
     const modalContent = {
       header: event.target.textContent,
@@ -54,7 +52,7 @@ const createRole = () => {
   } catch (e) {}
 }
 
-const createUser = () => {
+const createUser = (event) => {
   try {
     const modalContent = {
       header: event.target.textContent,
@@ -72,9 +70,10 @@ const getTasks = async() => {
   loader.startLoader(tableField);
   const result = await task.getAllTask();
 
-  const formElement = result.length == 0 ?
-    createNoElementContainer(tableField, '') :
-    await table.renderTable(result);
+  const formElement = result.length === 0
+    ? createNoElementContainer(tableField, '')
+    : await table.renderTable(result);
+
   elementAppearance(tableField, formElement, 1 / 300);
 }
 

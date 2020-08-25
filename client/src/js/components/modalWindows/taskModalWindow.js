@@ -1,24 +1,25 @@
 import Toasts from '../toasts/toasts.js';
 import Settings from '../../requests/settings.js';
-import { elementAppearance, elementDisappearing } from '../../actions/visibility.js';
-import { createSelectField, createList, setSelectFieldStyle } from '../select/selectElement.js';
+import {elementAppearance, elementDisappearing} from '../../actions/visibility.js';
+import {createList, createSelectField, setSelectFieldStyle} from '../select/selectElement.js';
 import {
-  createModalContainer,
-  createModalLayer,
-  createModalHeader,
+  closeWindow,
   createModalBtn,
+  createModalContainer,
+  createModalHeader,
+  createModalLayer,
   setCommonEvents,
-  setCommonPosition,
-  closeWindow
+  setCommonPosition
 } from './modalCommon.js';
 import Loader from '../loader/loader.js';
 import Task from '../../requests/tasks.js';
-import { startChat } from '../chat/chat.js';
-import { getUserName } from '../../actions/caching.js';
-import Table, { createEvents } from '../table/table.js'
-import { DOCWRAPPER } from '../../constants/constants.js';;
-import { startValidation } from '../../checking/validation.js';
-import { newTaskToWs } from '../../webSockets/wsInteraction.js';
+import {startChat} from '../chat/chat.js';
+import {getUserName} from '../../actions/caching.js';
+import Table, {createEvents} from '../table/table.js'
+import {DOCWRAPPER} from '../../constants/constants.js';
+import {startValidation} from '../../checking/validation.js';
+import {newTaskToWs} from '../../webSockets/wsInteraction.js';
+
 
 const setting = new Settings();
 const loader = new Loader();
@@ -58,7 +59,7 @@ export const renderTaskModalWindow = (itemid, headerName) => {
 };
 
 const createTaskModal = () => {
-  const taskModal = `
+  return `
     <form class="methods">
         <div class="left-side">
             <label for="">Тема:</label>
@@ -87,7 +88,6 @@ const createTaskModal = () => {
             <input type="tel" name="communication" id="communication" class="valid-item">
         </div>
     </form>`;
-  return taskModal;
 }
 
 
@@ -120,8 +120,8 @@ const setTaskModalPosition = () => {
 
 
 const setTaskModalEvents = element => {
-  element.addEventListener('click', () => {
-    if (event.target.tagName == 'BUTTON') {
+  element.addEventListener('click', (event) => {
+    if (event.target.tagName === 'BUTTON') {
       createNewTask(element);
     } else if (event.target.closest('.select-theme')) {
       createSelectThemeField(element, event.target.closest('.select-theme'));
@@ -145,7 +145,7 @@ const createSelectThemeField = (rootElement, parentElement) => {
   //3) Создаем индивидуальный контент в элемент списка 
   addListContentForTheme(listWrapper, parentElement, selectThemeWrapper)
     .then(result => selectThemeWrapper.insertAdjacentElement('beforeend', result))
-    .catch(e => {});
+    .catch(e => {throw new Error(e)});
   //4) задаем стили контейнеру
   setSelectFieldStyle(selectThemeWrapper, parentElement);
   //5) Показываем элемент
@@ -153,7 +153,7 @@ const createSelectThemeField = (rootElement, parentElement) => {
   //6) Фокусируемся на элементе
   selectThemeWrapper.focus();
   //7) Устанавливаем событие потери фокуса - элемент исчезает
-  selectThemeWrapper.addEventListener('focusout', () => { elementDisappearing(event.target, 2 / 100); });
+  selectThemeWrapper.addEventListener('focusout', (event) => { elementDisappearing(event.target, 2 / 100); });
 };
 
 
@@ -190,7 +190,8 @@ const addEventToSelectTheme = (listElement, selectElement, selectWrapper, item) 
   const to = document.getElementById('to');
   //ячейка с select-users
   const selectUsers = document.querySelector('.select-users');
-  listElement.addEventListener('click', async() => {
+
+  listElement.addEventListener('click', async (event) => {
     //1) текстовое значение записсать в select-theme
     [...selectElement.children][0].textContent = event.target.textContent;
     //2) скрыть весь контейнер с выпадающим списком
@@ -198,7 +199,7 @@ const addEventToSelectTheme = (listElement, selectElement, selectWrapper, item) 
     //3) заполнить поле с id темой
     themeId.value = item._id;
 
-    if (item.executor.length == 1) {
+    if (item.executor.length === 1) {
       //5.1.1) записываем значение id в ячейку toId
       toId.value = item.executor;
       if (!to.classList.contains('valid-item')) {
@@ -235,7 +236,7 @@ const addEventToSelectTheme = (listElement, selectElement, selectWrapper, item) 
     }
     //5.2.4) запишем в localStorage данные об id если их несколько
     localStorage.setItem('toUser', item.executor);
-  });
+  })
 };
 
 
@@ -258,8 +259,8 @@ const createSelectUsersField = parentElement => {
   //6) Фокусируемся на элементе
   selectUsersWrapper.focus();
   //7) Устанавливаем событие потери фокуса - элемент исчезает
-  selectUsersWrapper.addEventListener('focusout', () => { elementDisappearing(event.target, 2 / 100); });
-};
+  selectUsersWrapper.addEventListener('focusout', (event) => { elementDisappearing(event.target, 2 / 100); });
+}
 
 
 // прочитать map работат ли с async
@@ -279,7 +280,7 @@ const addListContentForExecutors = async listWrapper => {
       const listContent = `<span>${user.name}</span>`;
       listElement.insertAdjacentHTML('beforeend', listContent);
       listWrapper.insertAdjacentElement('beforeend', listElement);
-      listElement.addEventListener('click', () => { addEventToSelectUser(event.target, user); });
+      listElement.addEventListener('click', (event) => { addEventToSelectUser(event.target, user); });
     } catch (e) {}
   }
 
@@ -325,12 +326,12 @@ const addTaskToWindow = container => {
   const layer = document.querySelector('.bg-layer')
   elementDisappearing(oops, 1 / 4);
   //1) получаем форму
-  const forma = container.querySelector('form');
+  const { elements } = container.querySelector('form');
   //2 формируем данные
   const newTask = {
-      theme: forma.elements.themeId.value,
-      from: forma.elements.fromId.value,
-      to: forma.elements.toId.value,
+      theme: elements.themeId.value,
+      from: elements.fromId.value,
+      to: elements.toId.value,
       description: `${description.value}.
          Связаться со мной: ${communication.value}`,
     }

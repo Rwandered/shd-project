@@ -1,16 +1,15 @@
 import Toasts from '../toasts/toasts.js';
 import Settings from '../../requests/settings.js';
-import { elementAppearance, elementDisappearing } from '../../actions/visibility.js';
-import { createSelectField, createList, setSelectFieldStyle } from '../select/selectElement.js';
+import {elementAppearance, elementDisappearing} from '../../actions/visibility.js';
+import {createList, createSelectField, setSelectFieldStyle} from '../select/selectElement.js';
 import {
-  createModalContainer,
-  createModalLayer,
-  createModalHeader,
   createModalBtn,
+  createModalContainer,
+  createModalHeader,
+  createModalLayer,
   setCommonEvents,
   setCommonPosition
 } from './modalCommon.js';
-
 
 
 const toasts = new Toasts();
@@ -36,7 +35,7 @@ export const createRoleModalWindow = modalContent => {
 
 
 const createRoleModal = modalContent => {
-  const roleModalContent = `
+  return `
         <form action="" class="methods">
             <label for="${modalContent.contentName[0]}">${modalContent.labelName[0]}</label>
             <div class="select-users select-item">
@@ -50,14 +49,12 @@ const createRoleModal = modalContent => {
             </div>
             <input type="${modalContent.type[2]}" name="${modalContent.contentName[2]}" id="${modalContent.contentName[2]}" hidden>
         </form>`;
-  return roleModalContent;
 }
 
 
 const setRoleModalEvents = element => {
-  element.addEventListener('click', () => {
-    if (event.target.tagName == 'BUTTON') {
-
+  element.addEventListener('click', (event) => {
+    if (event.target.tagName === 'BUTTON') {
       createNewRole(element);
     } else if (event.target.closest('.select-item')) {
       const selectItem = event.target.closest('.select-item');
